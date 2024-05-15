@@ -1,4 +1,4 @@
-package com.dicoding.suargaapp.ui
+package com.dicoding.suargaapp.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
