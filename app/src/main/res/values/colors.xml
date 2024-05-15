@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--Primary-->
+    <color name="primary10">#FFF0F1</color>
+    <color name="primary20">#FFD1D3</color>
+    <color name="primary30">#FFBABE</color>
+    <color name="primary40">#FF9BA1</color>
+    <color name="primary50">#FF878E</color>
+    <color name="primary60">#FF6972</color>
+    <color name="primary70">#E86068</color>
+    <color name="primary80">#B54B51</color>
+    <color name="primary90">#8C3A3F</color>
+    <color name="primary100">#6B2C30</color>
+
+    <!--Neutral-->
+    <color name="neutral10">#FDFDFD</color>
+    <color name="neutral20">#E5E5E5</color>
+    <color name="neutral30">#CDCDCD</color>
+    <color name="neutral40">#B5B5B5</color>
+    <color name="neutral50">#9D9D9D</color>
+    <color name="neutral60">#858585</color>
+    <color name="neutral70">#6D6D6D</color>
+    <color name="neutral80">#555555</color>
+    <color name="neutral90">#3D3D3D</color>
+    <color name="neutral100">#252525</color>
+</resources>

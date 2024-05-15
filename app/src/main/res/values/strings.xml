@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SuargaApp</string>
+
+    <!--OnBoardingStartString-->
+    <string name="title_onboarding_start">Kesejahteraan Ibu Hamil \n dalam Satu Sentuhan</string>
+    <string name="text_onboarding_start">Selamat datang di Suarga! Dapatkan panduan nutrisi, pantau perkembangan bayi, dan artikel seputar kesehatan ibu hamil.\nKini semuanya dalam genggamanmu!</string>
+
+    <!--OnBoardingMidString-->
+    <string name="title_onboarding_mid">Temukan Kandungan Nutrisi \n Dalam Setiap Makanan</string>
+    <string name="text_onboarding_mid">Rasakan kemudahan luar biasa dengan teknologi kecerdasan buatan kami yang mampu mengenali makanan dari gambar dan memberikan informasi nutrisinya secara langsung!</string>
+
+    <!--OnBoardingEndString-->
+    <string name="title_onboarding_end">Kami Selalu Hadir Mendampingi Langkahmu, Ibu!</string>
+    <string name="text_onboarding_end">Kami memberikan dukungan tak terbatas dalam perjalanan kehamilanmu. Bersama, kita menjaga kesehatanmu dan si kecil dengan cinta dan perhatian tak terbatas!</string>
+    <string name="join">Bergabung Sekarang!</string>
+    <string name="next">Lanjut</string>
+
+</resources>
