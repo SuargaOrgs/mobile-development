@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/neutral40</item>
         <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowEnterTransition">@android:transition/fade</item>
     </style>
 
     <style name="Theme.SuargaApp" parent="Base.Theme.SuargaApp" />

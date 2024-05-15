@@ -3,8 +3,7 @@ package com.dicoding.suargaapp.ui.onboarding
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dicoding.suargaapp.R
-import com.dicoding.suargaapp.databinding.ActivityMainBinding
+import androidx.core.app.ActivityOptionsCompat
 import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageStartBinding
 
 class OnBoardingPageStart : AppCompatActivity() {
@@ -20,8 +19,10 @@ class OnBoardingPageStart : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.myButton.setOnClickListener{
-            startActivity(Intent(this, OnBoardingPageMid::class.java))
+        binding.myButton.setOnClickListener {
+            val intent = Intent(this, OnBoardingPageMid::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
+            startActivity(intent, options)
         }
     }
 }
