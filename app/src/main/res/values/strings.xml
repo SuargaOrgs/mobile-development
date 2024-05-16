@@ -15,5 +15,10 @@
     <string name="join">Bergabung Sekarang!</string>
     <string name="next">Lanjut</string>
     <string name="loginlink">Sudah punya akun? Masuk</string>
+    <string name="loginText">Masuk Akun</string>
+    <string name="signupText">Daftar Akun</string>
+    <string name="hintemail">Email Ibu</string>
+    <string name="img_signup">img_signup</string>
+    <string name="hintpassword">Masukkan Password Ibu</string>
 
 </resources>

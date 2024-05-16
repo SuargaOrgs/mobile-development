@@ -17,6 +17,7 @@ import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageEndBinding
 import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageMidBinding
 import com.dicoding.suargaapp.ui.login.LoginActivity
+import com.dicoding.suargaapp.ui.signup.SignupActivity
 
 class OnBoardingPageEnd : AppCompatActivity() {
 
@@ -31,6 +32,11 @@ class OnBoardingPageEnd : AppCompatActivity() {
     }
 
     private fun setupAction() {
+
+        binding.myButton.setOnClickListener{
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
         val textView = binding.tvLoginLink
         val text = "Sudah punya akun? Masuk"
         val spannableString = SpannableString(text)
