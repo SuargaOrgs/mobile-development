@@ -30,6 +30,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupAction()
+
+        val emailEditText = binding.emailEditText
+        val passwordEditText = binding.passwordEditText
+
+        emailEditText.setParentLayout(binding.emailEditTextLayout)
+        passwordEditText.setParentLayout(binding.passwordEditTextLayout)
     }
 
     private fun setupAction(){
