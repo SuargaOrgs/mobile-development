@@ -2,10 +2,37 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SuargaApp" parent="Theme.Material3.DynamicColors.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/neutral40</item>
+        <item name="colorPrimary">@color/primary60</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowEnterTransition">@android:transition/fade</item>
     </style>
 
     <style name="Theme.SuargaApp" parent="Base.Theme.SuargaApp" />
+
+    <!-- Tema untuk DatePickerDialog -->
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">@color/primary60</item>
+        <item name="materialCalendarTheme">@style/CustomDatePickerStyle</item>
+    </style>
+
+    <!-- Gaya untuk DatePicker -->
+    <style name="CustomDatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/primary60</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSurface">@color/primary60</item>
+        <item name="colorOnSurface">@android:color/black</item>
+    </style>
+
+    <!-- Gaya untuk Hari pada DatePicker -->
+    <style name="CustomDatePickerDayStyle" parent="Widget.MaterialComponents.MaterialCalendar.Day">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="itemFillColor">@color/primary60</item> <!-- Background color for the selected day -->
+        <item name="itemShapeAppearanceOverlay">@style/CustomDatePickerDaySelectedShape</item>
+    </style>
+
+    <!-- Gaya untuk Bentuk Hari yang Dipilih -->
+    <style name="CustomDatePickerDaySelectedShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

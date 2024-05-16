@@ -20,5 +20,9 @@
     <string name="hintemail">Email Ibu</string>
     <string name="img_signup">img_signup</string>
     <string name="hintpassword">Masukkan Password Ibu</string>
+    <string name="signup">Daftar</string>
+    <string name="name_hint">Masukkan Nama Ibu</string>
+    <string name="date_hint">Tanggal Lahir Ibu</string>
+    <string name="date_baby_hint">Tanggal Awal Kehamilan</string>
 
 </resources>

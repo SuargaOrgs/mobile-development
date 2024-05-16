@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityLoginBinding
@@ -26,15 +27,22 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupAction()
+    }
+
+    private fun setupAction(){
+
         setSupportActionBar(binding.topAppBar)
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
 
-        setupAction()
-    }
+        binding.myButton.setOnClickListener {
+            val intent = Intent(this, SignupNextActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
+            startActivity(intent, options)
+        }
 
-    private fun setupAction(){
         val textView = binding.tvLoginLink
         val text = "Sudah punya akun? Masuk"
         val spannableString = SpannableString(text)
