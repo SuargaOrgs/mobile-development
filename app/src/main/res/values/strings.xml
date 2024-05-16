@@ -24,5 +24,10 @@
     <string name="name_hint">Masukkan Nama Ibu</string>
     <string name="date_hint">Tanggal Lahir Ibu</string>
     <string name="date_baby_hint">Tanggal Awal Kehamilan</string>
+    <string name="title_login">Selamat Datang Kembali, Ibu!</string>
+    <string name="text_login"><![CDATA[Kesejahteraan Ibu Hamil dalam Satu Sentuhan.]]></string>
+    <string name="rememberme">Ingat Saya</string>
+    <string name="forgot_pass">Lupa Password?</string>
+    <string name="login">Masuk</string>
 
 </resources>
