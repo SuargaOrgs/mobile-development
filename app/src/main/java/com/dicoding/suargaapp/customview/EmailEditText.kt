@@ -8,8 +8,11 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.dicoding.suargaapp.R
+import com.google.android.material.textfield.TextInputLayout
 
 class EmailEditText : AppCompatEditText {
+    private lateinit var parentLayout: TextInputLayout
+
     constructor(context: Context) : super(context) {
         init()
     }
@@ -43,15 +46,19 @@ class EmailEditText : AppCompatEditText {
                 val isValidEmail = email.matches(emailPattern.toRegex())
 
                 if (!isValidEmail) {
-                    setError("Type email format correctly", null)
+                    parentLayout.error = "Type email format correctly"
                 } else {
-                    error = null
+                    parentLayout.error = null
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+    }
+
+    fun setParentLayout(layout: TextInputLayout) {
+        parentLayout = layout
     }
 
 }

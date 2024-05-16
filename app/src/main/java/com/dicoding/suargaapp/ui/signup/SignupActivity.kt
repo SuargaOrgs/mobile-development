@@ -28,6 +28,15 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupAction()
+
+        val emailEditText = binding.emailEditText
+        val passwordEditText = binding.passwordEditText
+        val passwordConfirmEditText = binding.passwordConfirmEditText
+
+        emailEditText.setParentLayout(binding.emailEditTextLayout)
+        passwordEditText.setParentLayout(binding.passwordEditTextLayout)
+        passwordConfirmEditText.setParentLayout(binding.passwordConfirmEditTextLayout)
+        passwordConfirmEditText.setMainPasswordEditText(passwordEditText)
     }
 
     private fun setupAction(){

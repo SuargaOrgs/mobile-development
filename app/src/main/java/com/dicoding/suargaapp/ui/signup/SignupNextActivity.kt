@@ -15,6 +15,8 @@ class SignupNextActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupAction()
+
+        binding.nameEditText.setParentLayout(binding.nameEditTextLayout)
     }
 
     private fun setupAction() {
