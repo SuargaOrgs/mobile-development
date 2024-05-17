@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
             if (!user.isLogin) {
                 startActivity(Intent(this, OnBoardingPageStart::class.java))
                 finish()
+            } else {
+                val greetings = "Hai, ${user.email}"
+                binding.greetingTextView.text = greetings
             }
         }
 
@@ -31,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.myButton.setOnClickListener{
-//            startActivity(Intent(this, OnBoardingPageStart::class.java))
             mainViewModel.logout()
         }
     }

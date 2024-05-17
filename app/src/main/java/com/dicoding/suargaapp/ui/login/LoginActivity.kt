@@ -12,10 +12,12 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityLoginBinding
 import com.dicoding.suargaapp.databinding.ActivityMainBinding
+import com.dicoding.suargaapp.ui.main.MainActivity
 import com.dicoding.suargaapp.viewmodelfactory.ViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
@@ -45,6 +47,53 @@ class LoginActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.loginButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
+            loginViewModel.login(email, password)
+
+            loginViewModel.loginResult.observe(this) { loginResult ->
+                when (loginResult) {
+                    is LoginViewModel.LoginResult.Success -> {
+                        loginResult.user
+
+                        AlertDialog.Builder(this)
+                            .setTitle("Login Success")
+                            .setMessage("Ayo buruan masuk")
+                            .setPositiveButton(getString(R.string.next)) { _, _ ->
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
+                            }
+                            .create()
+                            .show()
+                    }
+
+                    is LoginViewModel.LoginResult.Error -> {
+                        val errorResponse = loginResult.errorResponse
+                        val errorMessage = errorResponse.message
+
+                        AlertDialog.Builder(this)
+                            .setTitle("Login Failed")
+                            .setMessage("Error: $errorMessage" )
+                            .setPositiveButton(getString(R.string.next)) { _, _ ->
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .create()
+                            .show()
+                    }
+                }
+            }
+
+            loginViewModel.isLoading.observe(this) {
+                showLoading(it)
+            }
+        }
+
         val textView = binding.forgotPass
         val text = "Lupa Password?"
         val spannableString = SpannableString(text)
@@ -68,5 +117,9 @@ class LoginActivity : AppCompatActivity() {
 
         textView.text = spannableString
         textView.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

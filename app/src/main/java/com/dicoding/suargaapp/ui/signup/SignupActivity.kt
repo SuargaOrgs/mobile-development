@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import com.dicoding.suargaapp.R
@@ -17,9 +18,9 @@ import com.dicoding.suargaapp.databinding.ActivityLoginBinding
 import com.dicoding.suargaapp.databinding.ActivityMainBinding
 import com.dicoding.suargaapp.databinding.ActivitySignupBinding
 import com.dicoding.suargaapp.ui.login.LoginActivity
+import com.dicoding.suargaapp.viewmodelfactory.ViewModelFactory
 
 class SignupActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +48,12 @@ class SignupActivity : AppCompatActivity() {
         }
 
         binding.myButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
             val intent = Intent(this, SignupNextActivity::class.java)
+            intent.putExtra("email", email)
+            intent.putExtra("password", password)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             startActivity(intent, options)
         }
