@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.dicoding.suargaapp.R
@@ -74,5 +75,13 @@ class SignupNextActivity : AppCompatActivity() {
                 Log.e("SignupNextActivity", "Email or password is null")
             }
         }
+
+        signUpViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
