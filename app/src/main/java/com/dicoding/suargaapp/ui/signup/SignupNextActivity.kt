@@ -7,16 +7,14 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import com.dicoding.suargaapp.R
-import com.dicoding.suargaapp.databinding.ActivitySignupBinding
 import com.dicoding.suargaapp.databinding.ActivitySignupNextBinding
 import com.dicoding.suargaapp.ui.login.LoginActivity
-import com.dicoding.suargaapp.viewmodelfactory.ViewModelFactory
+import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class SignupNextActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupNextBinding
     private val signUpViewModel by viewModels<SignUpViewModel> {
-        ViewModelFactory.getInstance(this)
+        AuthViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +38,14 @@ class SignupNextActivity : AppCompatActivity() {
         Log.d("cekEmail", "email: $email, password: $password")
 
         binding.myButton.setOnClickListener {
-            // Check if email and password are not null
             if (email != null && password != null) {
-                val name = binding.nameEditText.text.toString()
+                val fullName = binding.nameEditText.text.toString()
+                val birthday = binding.dateMotherEditText.text.toString()
+                val pregnancyDate = binding.dateBabyEditText.text.toString()
 
-                signUpViewModel.register(name, email, password).observe(this) { result ->
+                Log.d("cekNama", "name: $fullName, birthdate: $birthday, pregnancy: $pregnancyDate")
+
+                signUpViewModel.register(email, password, fullName, birthday, pregnancyDate).observe(this) { result ->
                     if (result.error == false) {
                         AlertDialog.Builder(this).apply {
                             setTitle("Success")

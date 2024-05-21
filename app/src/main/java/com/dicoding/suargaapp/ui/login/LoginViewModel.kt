@@ -25,10 +25,17 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
             try {
                 val response = repository.login(email, password)
                 if (response.error == false) {
-                    val user = response.loginResult!!.token?.let { UserModel(email, it, true) }
+                    val name = response.data?.namaLengkap
+                    val user = response.data?.token?.let { token ->
+                        name?.let { name ->
+                            UserModel(name, email, token, true)
+                        }
+                    }
+
                     if (user != null) {
                         repository.saveSession(user)
                     }
+
                     _loginResult.value = user?.let { LoginResult.Success(it) }
                 } else {
                     val errorResponse = ErrorResponse(error = true, message = response.message ?: "Unknown error")

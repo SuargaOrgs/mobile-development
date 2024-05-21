@@ -1,5 +1,7 @@
 package com.dicoding.suargaapp.ui.signup
 
+import android.provider.ContactsContract.CommonDataKinds.Email
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,12 +17,12 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun register(name: String, email: String, password: String): LiveData<RegisterResponse> {
+    fun register(email: String, password: String, fullName: String, birthday: String, pregnancyDate: String): LiveData<RegisterResponse> {
         val resultLiveData = MutableLiveData<RegisterResponse>()
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val result = repository.register(name, email, password)
+                val result = repository.register(email, password, fullName, birthday, pregnancyDate)
                 resultLiveData.postValue(result)
             } catch (e: HttpException) {
                 val jsonInString = e.response()?.errorBody()?.string()

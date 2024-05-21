@@ -60,7 +60,7 @@ class CalendarEditText : AppCompatEditText, DatePickerDialog.OnDateSetListener {
     }
 
     private fun updateLabel() {
-        val format = "dd/MM/yyyy" // Format tanggal
+        val format = "yyyy-MM-dd" // Format tanggal
         val sdf = SimpleDateFormat(format, Locale.US)
         setText(sdf.format(calendar.time))
     }

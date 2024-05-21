@@ -11,20 +11,27 @@ class UserRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService,
 ) {
-    suspend fun register(name: String, email: String, password: String): RegisterResponse {
-        return apiService.register(name, email, password)
+    suspend fun register(email: String, password: String, fullName: String, birthday: String, pregnancyDate: String): RegisterResponse {
+        return apiService.register(email, password, fullName, birthday, pregnancyDate)
     }
 
     suspend fun login(email: String, password: String): LoginResponse {
         val response = apiService.login(email, password)
         if (response.error == false) {
-            val user = response.loginResult?.token?.let { UserModel(email, it, true) }
+            val name = response.data?.namaLengkap
+            val user = response.data?.token?.let { token ->
+                name?.let { name ->
+                    UserModel(name, email, token, true)
+                }
+            }
+
             if (user != null) {
                 saveSession(user)
             }
         }
         return response
     }
+
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }

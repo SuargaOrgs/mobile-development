@@ -6,12 +6,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.dicoding.suargaapp.databinding.ActivityMainBinding
 import com.dicoding.suargaapp.ui.onboarding.OnBoardingPageStart
-import com.dicoding.suargaapp.viewmodelfactory.ViewModelFactory
+import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(this)
+        AuthViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, OnBoardingPageStart::class.java))
                 finish()
             } else {
-                val greetings = "Hai, ${user.email}"
+                val greetings = "Hai, ${user.name}"
                 binding.greetingTextView.text = greetings
             }
         }

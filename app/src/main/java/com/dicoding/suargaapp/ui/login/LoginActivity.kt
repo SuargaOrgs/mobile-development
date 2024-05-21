@@ -16,14 +16,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityLoginBinding
-import com.dicoding.suargaapp.databinding.ActivityMainBinding
 import com.dicoding.suargaapp.ui.main.MainActivity
-import com.dicoding.suargaapp.viewmodelfactory.ViewModelFactory
+import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
+        AuthViewModelFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
