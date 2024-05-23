@@ -14,4 +14,5 @@ Progress
 - Alert dialog masih kasaran masih template
 - ID belum diperbaiki (masih kasaran)
 - Keknya backend nya belom rapi dehh nanti aku cek lagi (yoga)
+- toggle password yang hilang saat input masih salah 
 
