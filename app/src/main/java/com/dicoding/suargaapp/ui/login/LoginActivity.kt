@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        val textView = binding.forgotPass
+        val textView = binding.tvForgotPass
         val text = "Lupa Password?"
         val spannableString = SpannableString(text)
 

@@ -33,7 +33,7 @@ class OnBoardingPageEnd : AppCompatActivity() {
 
     private fun setupAction() {
 
-        binding.myButton.setOnClickListener{
+        binding.buttonRegister.setOnClickListener{
             startActivity(Intent(this, SignupActivity::class.java))
         }
 

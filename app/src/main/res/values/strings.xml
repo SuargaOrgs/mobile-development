@@ -13,6 +13,7 @@
     <string name="title_onboarding_end">Kami Selalu Hadir Mendampingi Langkahmu, Ibu!</string>
     <string name="text_onboarding_end">Kami memberikan dukungan tak terbatas dalam perjalanan kehamilanmu. Bersama, kita menjaga kesehatanmu dan si kecil dengan cinta dan perhatian tak terbatas!</string>
     <string name="join">Bergabung Sekarang!</string>
+
     <string name="next">Lanjut</string>
     <string name="loginlink">Sudah punya akun? Masuk</string>
     <string name="loginText">Masuk Akun</string>
@@ -29,5 +30,46 @@
     <string name="rememberme">Ingat Saya</string>
     <string name="forgot_pass">Lupa Password?</string>
     <string name="login">Masuk</string>
+    <string name="assesmenText">Asesmen Ibu</string>
+    <string name="img_assesmen">img_assesmen</string>
+    <string name="textCondition">Kondisi Ibu</string>
+    <string name="error_not_a_number">Masukkan Angka</string>
+    <string name="hint_height">Tinggi Badan Ibu</string>
+    <string name="hint_weight">Berat Badan Ibu</string>
+    <string name="textMomActivity">Aktivitas Harian Ibu</string>
+    <string name="textMomFact">Faktor yang Membuat Stress</string>
+    <string name="img_why_1">Untuk apa informasi tersebut?</string>
+    <string name="submitAsesmen">Kumpulkan Asesmen</string>
+    <string name="text_result">Untuk menjaga kesehatan Ibu dan bayi, maka asupan nutrisi Ibu adalah sebagai berikut:</string>
+    <string name="tv_karbohidrat">374</string>
+    <string name="tv_protein">113</string>
+    <string name="tv_lemak">64</string>
+    <string name="textKarbohidrat">Karbohidrat</string>
+    <string name="textProtein">Protein</string>
+    <string name="textLemak">Lemak</string>
+    <string name="textHeight">Tinggi Badan</string>
+    <string name="tv_height">158 cm</string>
+    <string name="textWeight">Berat Badan</string>
+    <string name="tv_weight">58 kg</string>
+    <string name="textFormula">Rumus yang kami gunakan</string>
+    <string name="toHome">Menuju Beranda</string>
+
+    <string-array name="options_activity">
+        <item>Pilihan Aktivitas</item>
+        <item>Istirahat bed rest</item>
+        <item>Bed rest, tapi bisa bergerak terbatas</item>
+        <item>Turun dari tempat tidur</item>
+        <item>Aktifitas sedang</item>
+        <item>Aktifitas berat</item>
+    </string-array>
+
+    <string-array name="options_fact">
+        <item>Pilihan Faktor</item>
+        <item>Tidak ada stress (gizi normal)</item>
+        <item>Perdangan, kanker, trauma, cidera</item>
+        <item>Luka bakar, penyakit hati</item>
+        <item>TB paru, HIV aids</item>
+        <item>Luka kepala berat</item>
+    </string-array>
 
 </resources>

@@ -15,6 +15,15 @@
         android:theme="@style/Theme.SuargaApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.result.ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.asesmen.AsesmenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AsesmenActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.signup.SignupNextActivity"
             android:exported="false" />
         <activity

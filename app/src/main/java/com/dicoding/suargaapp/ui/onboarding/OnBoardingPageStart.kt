@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityOptionsCompat
 import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageStartBinding
+import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
 
 class OnBoardingPageStart : AppCompatActivity() {
 
@@ -19,8 +20,8 @@ class OnBoardingPageStart : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.myButton.setOnClickListener {
-            val intent = Intent(this, OnBoardingPageMid::class.java)
+        binding.buttonNext.setOnClickListener {
+            val intent = Intent(this, AsesmenActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             startActivity(intent, options)
         }

@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             } else {
                 val greetings = "Hai, ${user.name}"
-                binding.greetingTextView.text = greetings
+                binding.tvGreeting.text = greetings
             }
         }
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.myButton.setOnClickListener{
+        binding.buttonLogout.setOnClickListener{
             mainViewModel.logout()
         }
     }

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.dicoding.suargaapp.databinding.ActivitySignupNextBinding
+import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
 import com.dicoding.suargaapp.ui.login.LoginActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
@@ -51,7 +52,7 @@ class SignupNextActivity : AppCompatActivity() {
                             setTitle("Success")
                             setMessage(result.message)
                             setPositiveButton("Next") { _, _ ->
-                                val intent = Intent(this@SignupNextActivity, LoginActivity::class.java)
+                                val intent = Intent(this@SignupNextActivity, AsesmenActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }

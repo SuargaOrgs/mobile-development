@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityOptionsCompat
-import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageMidBinding
-import com.dicoding.suargaapp.databinding.ActivityOnBoardingPageStartBinding
 import com.dicoding.suargaapp.ui.signup.SignupActivity
 
 class OnBoardingPageMid : AppCompatActivity() {
@@ -22,13 +20,13 @@ class OnBoardingPageMid : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.myButton.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
             val intent = Intent(this, OnBoardingPageEnd::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             startActivity(intent, options)
         }
 
-        binding.myButtonSkip.setOnClickListener {
+        binding.buttonSkip.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             startActivity(intent, options)
