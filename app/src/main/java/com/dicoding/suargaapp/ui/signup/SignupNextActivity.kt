@@ -53,6 +53,8 @@ class SignupNextActivity : AppCompatActivity() {
                             setMessage(result.message)
                             setPositiveButton("Next") { _, _ ->
                                 val intent = Intent(this@SignupNextActivity, AsesmenActivity::class.java)
+                                intent.putExtra("birthday", birthday)
+                                intent.putExtra("pregnancyDate", pregnancyDate)
                                 startActivity(intent)
                                 finish()
                             }

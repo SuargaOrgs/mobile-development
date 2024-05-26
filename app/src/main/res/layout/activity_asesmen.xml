@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/heightEditTextLayout" />
 
     <com.dicoding.suargaapp.customview.DropdownOptionView
-        android:id="@+id/option_actvity"
+        android:id="@+id/option_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option_actvity" />
+        app:layout_constraintTop_toBottomOf="@+id/option_activity" />
 
     <com.dicoding.suargaapp.customview.DropdownOptionView
         android:id="@+id/option_fact"

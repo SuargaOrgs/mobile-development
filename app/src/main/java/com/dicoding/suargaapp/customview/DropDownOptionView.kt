@@ -59,4 +59,8 @@ class DropdownOptionView : FrameLayout {
         val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, options)
         dropdownSpinner.adapter = adapter
     }
+
+    fun getSelectedOption(): String {
+        return dropdownSpinner.selectedItem as String
+    }
 }

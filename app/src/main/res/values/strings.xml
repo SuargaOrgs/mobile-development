@@ -59,17 +59,21 @@
         <item>Istirahat bed rest</item>
         <item>Bed rest, tapi bisa bergerak terbatas</item>
         <item>Turun dari tempat tidur</item>
-        <item>Aktifitas sedang</item>
-        <item>Aktifitas berat</item>
+        <item>Aktivitas sedang</item>
+        <item>Aktivitas berat</item>
     </string-array>
 
     <string-array name="options_fact">
         <item>Pilihan Faktor</item>
-        <item>Tidak ada stress (gizi normal)</item>
-        <item>Perdangan, kanker, trauma, cidera</item>
-        <item>Luka bakar, penyakit hati</item>
-        <item>TB paru, HIV aids</item>
-        <item>Luka kepala berat</item>
+        <item>Tidak ada stress</item>
+        <item>Stress ringan</item>
+        <item>Stress sedang</item>
+        <item>Stress berat</item>
+        <item>Stress sangat berat</item>
     </string-array>
+
+    <!--  Result Activity  -->
+    <string name="height_text">"%1$d cm"</string>
+    <string name="weight_text">"%1$d kg"</string>
 
 </resources>

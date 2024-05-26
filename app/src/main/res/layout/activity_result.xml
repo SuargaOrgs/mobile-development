@@ -95,6 +95,7 @@
                             android:src="@drawable/ic_karbohidrat" />
 
                         <TextView
+                            android:id="@+id/tv_carbohydrate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
@@ -141,6 +142,7 @@
                             android:src="@drawable/ic_protein" />
 
                         <TextView
+                            android:id="@+id/tv_protein"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
@@ -190,6 +192,7 @@
                         android:src="@drawable/ic_lemak" />
 
                     <TextView
+                        android:id="@+id/tv_fat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -257,6 +260,7 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tv_height"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -273,6 +277,7 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tv_mom_activity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -297,6 +302,7 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tv_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -313,6 +319,7 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tv_stress_factor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
