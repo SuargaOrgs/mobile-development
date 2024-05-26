@@ -17,4 +17,5 @@ Progress
 - toggle password yang hilang saat input masih salah
 - Untuk sementara halaman asesmen ditaruh setelah halaman Onboarding agar tidak perlu register berkali-kali untuk testing (faishal)
 - Sementara app flow -> Onboarding -> Asesmen
-- tes commit 
+- tes commit
+- Masih ada bug di bagian dropdown ada yang masih belum bisa dipencet (Faishal)
