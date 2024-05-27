@@ -48,6 +48,7 @@ class SignupNextActivity : AppCompatActivity() {
 
                 signUpViewModel.register(email, password, fullName, birthday, pregnancyDate).observe(this) { result ->
                     if (result.error == false) {
+
                         AlertDialog.Builder(this).apply {
                             setTitle("Success")
                             setMessage(result.message)

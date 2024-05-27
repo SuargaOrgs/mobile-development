@@ -21,7 +21,7 @@ class OnBoardingPageStart : AppCompatActivity() {
 
     private fun setupAction() {
         binding.buttonNext.setOnClickListener {
-            val intent = Intent(this, AsesmenActivity::class.java)
+            val intent = Intent(this, OnBoardingPageMid::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
             startActivity(intent, options)
         }

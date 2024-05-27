@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.remote.response.ErrorResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import com.dicoding.suargaapp.data.repository.UserRepository
@@ -23,6 +24,18 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = repository.register(email, password, fullName, birthday, pregnancyDate)
+                if (result.error == false) {
+                    val name = result.data?.namaLengkap
+                    val user = result.data?.token?.let { token ->
+                        name?.let { name ->
+                            UserModel(name, email, token, true)
+                        }
+                    }
+
+                    if (user != null) {
+                        repository.saveSession(user)
+                    }
+                }
                 resultLiveData.postValue(result)
             } catch (e: HttpException) {
                 val jsonInString = e.response()?.errorBody()?.string()

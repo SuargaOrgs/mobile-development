@@ -1,5 +1,6 @@
 package com.dicoding.suargaapp.ui.result
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityResultBinding
 import com.dicoding.suargaapp.helper.Helper.calculateAge
 import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
+import com.dicoding.suargaapp.ui.main.MainActivity
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
@@ -45,6 +47,11 @@ class ResultActivity : AppCompatActivity() {
         binding.tvCarbohydrate.text = carbohydrateNeeds.toInt().toString()
         binding.tvProtein.text = proteinNeeds.toInt().toString()
         binding.tvFat.text = fatNeeds.toInt().toString()
+
+        binding.homeButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun calculateBMR(height: Int, weight: Int, age: Int): Double {
