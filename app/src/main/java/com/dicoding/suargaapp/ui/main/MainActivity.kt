@@ -26,6 +26,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val greetings = "Hai, ${user.name}"
                 binding.tvGreeting.text = greetings
+                if (user.hasCompletedAssessment) {
+                    binding.tvAssessment.text = "sudah mengisi asesmen"
+                } else {
+                    binding.tvAssessment.text = "belum mengisi asesmen"
+                }
             }
         }
 

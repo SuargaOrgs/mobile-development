@@ -28,6 +28,7 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                     val name = response.data?.namaLengkap
                     val user = response.data?.token?.let { token ->
                         name?.let { name ->
+                            // nanti ganti
                             UserModel(name, email, token, true)
                         }
                     }

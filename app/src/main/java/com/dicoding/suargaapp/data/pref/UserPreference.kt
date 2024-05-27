@@ -17,10 +17,11 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
     suspend fun saveSession(user: UserModel) {
         dataStore.edit { preferences ->
-            preferences[NAME] = user.name
+            preferences[NAME_KEY] = user.name
             preferences[EMAIL_KEY] = user.email
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
+            preferences[HAS_COMPLETED_ASSESSMENT_KEY] = false
         }
         Log.d("UserPreference", "saveSession: ${preferencesDataStore(name = "session")}")
     }
@@ -28,11 +29,18 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
             UserModel(
-                preferences[NAME] ?: "",
+                preferences[NAME_KEY] ?: "",
                 preferences[EMAIL_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
+                preferences[IS_LOGIN_KEY] ?: false,
+                preferences[HAS_COMPLETED_ASSESSMENT_KEY] ?: false
             )
+        }
+    }
+
+    suspend fun completeAssessment() {
+        dataStore.edit { preferences ->
+            preferences[HAS_COMPLETED_ASSESSMENT_KEY] = true
         }
     }
 
@@ -46,10 +54,11 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         @Volatile
         private var INSTANCE: UserPreference? = null
 
-        private val NAME = stringPreferencesKey("name")
+        private val NAME_KEY = stringPreferencesKey("name")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+        private val HAS_COMPLETED_ASSESSMENT_KEY = booleanPreferencesKey("hasCompletedAssessment")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {
