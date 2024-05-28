@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.dicoding.suargaapp.databinding.ActivitySignupNextBinding
 import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
-import com.dicoding.suargaapp.ui.login.LoginActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class SignupNextActivity : AppCompatActivity() {

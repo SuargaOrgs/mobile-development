@@ -1,4 +1,4 @@
-package com.dicoding.suargaapp.ui.main
+package com.dicoding.suargaapp.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +8,14 @@ import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: UserRepository) : ViewModel() {
+class HomeViewModel(private val repository: UserRepository) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            repository.logout()
+        }
     }
 }

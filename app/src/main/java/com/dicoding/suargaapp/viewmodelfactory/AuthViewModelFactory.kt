@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.suargaapp.data.repository.UserRepository
 import com.dicoding.suargaapp.di.Injection
+import com.dicoding.suargaapp.ui.home.HomeViewModel
 import com.dicoding.suargaapp.ui.login.LoginViewModel
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.signup.SignUpViewModel
@@ -22,6 +23,9 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
