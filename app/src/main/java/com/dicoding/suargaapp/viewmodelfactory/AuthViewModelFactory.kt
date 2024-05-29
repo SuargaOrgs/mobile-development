@@ -8,6 +8,7 @@ import com.dicoding.suargaapp.di.Injection
 import com.dicoding.suargaapp.ui.home.HomeViewModel
 import com.dicoding.suargaapp.ui.login.LoginViewModel
 import com.dicoding.suargaapp.ui.main.MainViewModel
+import com.dicoding.suargaapp.ui.profile.ProfileViewModel
 import com.dicoding.suargaapp.ui.signup.SignUpViewModel
 
 class AuthViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -26,6 +27,9 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

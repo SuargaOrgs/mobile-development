@@ -5,13 +5,13 @@
         android:id="@+id/botton_home"
         android:title="Home"
         android:icon="@drawable/ic_home"
-        android:background="@drawable/tab_background"/>
+        />
 
     <item
         android:id="@+id/botton_artikel"
         android:title="Artikel"
         android:icon="@drawable/ic_artikel"
-        android:background="@drawable/tab_background"/>
+        />
 
     <item
         android:title=""
@@ -21,12 +21,12 @@
         android:id="@+id/botton_riwayat"
         android:title="Riwayat"
         android:icon="@drawable/ic_riwayat"
-        android:background="@drawable/tab_background"/>
+        />
 
     <item
         android:id="@+id/botton_profile"
         android:title="Profile"
         android:icon="@drawable/ic_profile"
-        android:background="@drawable/tab_background"/>
+        />
 
 </menu>

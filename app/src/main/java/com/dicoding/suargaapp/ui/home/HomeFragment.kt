@@ -32,20 +32,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAction() {
-        binding.buttonLogout.setOnClickListener {
-            homeViewModel.logout()
-        }
+
     }
 
     private fun observeViewModel() {
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            val greetings = "Hai, ${user.name}"
+            val greetings = "Hallo Ibu, ${user.name}!"
             binding.tvGreeting.text = greetings
-            if (user.hasCompletedAssessment) {
-                binding.tvAssessment.text = "sudah mengisi asesmen"
-            } else {
-                binding.tvAssessment.text = "belum mengisi asesmen"
-            }
+//            if (user.hasCompletedAssessment) {
+//                binding.tvAssessment.text = "sudah mengisi asesmen"
+//            } else {
+//                binding.tvAssessment.text = "belum mengisi asesmen"
+//            }
         }
     }
 }
