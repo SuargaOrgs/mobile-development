@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityMainBinding
 import com.dicoding.suargaapp.ui.article.ArticleFragment
+import com.dicoding.suargaapp.ui.camera.CameraActivity
 import com.dicoding.suargaapp.ui.home.HomeFragment
 import com.dicoding.suargaapp.ui.onboarding.OnBoardingPageStart
 import com.dicoding.suargaapp.ui.profile.ProfileFragment
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.fabAddpic.setOnClickListener{
-            Toast.makeText(this,"Add Photo", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, CameraActivity::class.java))
         }
 
         mainViewModel.getSession().observe(this) { user ->

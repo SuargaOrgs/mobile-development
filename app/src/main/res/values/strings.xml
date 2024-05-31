@@ -84,5 +84,6 @@
     <string name="article">Artikel</string>
     <string name="profile">Profil</string>
     <string name="riwayat">Riwayat</string>
+    <string name="scanMakanan">Scan Makanan</string>
 
 </resources>
