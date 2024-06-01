@@ -17,4 +17,5 @@ Progress
 - toggle password yang hilang saat input masih salah (faishal)
 - Masih ada log dalam result activity (yoga) 
 - Masih ada bug di bagian dropdown ada yang masih belum bisa dipencet (Faishal)
-- Sudah ada fungsi untuk mengecek user sudah mengisi asesmen apa belum tapi semetara masih salah dan menunggu API (Yoga)
+- SMasih belum bisa menampilkan apakah user sudah mengisi asesmen atau belum (yoga)
+  
