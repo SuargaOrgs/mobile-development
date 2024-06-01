@@ -1,5 +1,6 @@
 package com.dicoding.suargaapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.FragmentHomeBinding
+import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class HomeFragment : Fragment() {
@@ -39,11 +41,6 @@ class HomeFragment : Fragment() {
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
             binding.tvGreeting.text = greetings
-//            if (user.hasCompletedAssessment) {
-//                binding.tvAssessment.text = "sudah mengisi asesmen"
-//            } else {
-//                binding.tvAssessment.text = "belum mengisi asesmen"
-//            }
         }
     }
 }

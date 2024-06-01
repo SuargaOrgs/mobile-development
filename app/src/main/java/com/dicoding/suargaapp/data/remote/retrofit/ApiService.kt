@@ -1,5 +1,6 @@
 package com.dicoding.suargaapp.data.remote.retrofit
 
+import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import retrofit2.http.Field
@@ -24,5 +25,17 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @FormUrlEncoded
+    @POST("assessment")
+    suspend fun saveAssessment(
+        @Field("tinggiBadan") tinggiBadan: Int,
+        @Field("beratBadan") beratBadan: Int,
+        @Field("aktivitasHarian") aktivitasHarian: String,
+        @Field("faktor") faktor : String,
+        @Field("karbohidrat") karbohidrat: Int,
+        @Field("protein") protein: Int,
+        @Field("lemak") lemak: Int
+    ): AssessmentResponse
 
 }
