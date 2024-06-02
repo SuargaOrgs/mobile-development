@@ -9,10 +9,13 @@ import com.dicoding.suargaapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: UserRepository) : ViewModel() {
-
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
+//    fun getSession(): LiveData<UserModel> {
+//        return repository.getSession().asLiveData()
+//    }
+//
+//    fun logout() {
+//        viewModelScope.launch {
+//            repository.logout()
+//        }
+//    }
 }

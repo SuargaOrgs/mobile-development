@@ -2,10 +2,12 @@ package com.dicoding.suargaapp.data.repository
 
 import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.pref.UserPreference
+import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import com.dicoding.suargaapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
@@ -42,6 +44,26 @@ class UserRepository private constructor(
 
     suspend fun logout() {
         userPreference.logout()
+    }
+
+    suspend fun saveAssessment(
+        tinggiBadan: Int,
+        beratBadan: Int,
+        aktivitasHarian: String,
+        faktor: String,
+        karbohidrat: Int,
+        protein: Int,
+        lemak: Int
+    ): AssessmentResponse {
+        val response = apiService.saveAssessment(tinggiBadan, beratBadan, aktivitasHarian, faktor, karbohidrat, protein, lemak)
+        if (response.error == false) {
+            userPreference.hasCompletedAssessment(response)
+        }
+        return response
+    }
+
+    fun hasCompletedAssessment(): Flow<Boolean> {
+        return userPreference.getSession().map { it.hasCompletedAssessment }
     }
 
     companion object {

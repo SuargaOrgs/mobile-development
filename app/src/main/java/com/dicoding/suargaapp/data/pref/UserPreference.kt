@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -38,7 +39,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
-    suspend fun completeAssessment() {
+    suspend fun hasCompletedAssessment(assessmentResponse: AssessmentResponse) {
         dataStore.edit { preferences ->
             preferences[HAS_COMPLETED_ASSESSMENT_KEY] = true
         }
