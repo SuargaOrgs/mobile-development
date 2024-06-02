@@ -313,8 +313,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="3d3d3d" />
-                            <entry key="outputName" value="ic_flash_light" />
-                            <entry key="sourceFile" value="G:\00_KULIAH\BANGKIT\00_CAPSTONE UI\00_DEVELOPING\ic_flash_light.svg" />
+                            <entry key="outputName" value="ic_delete" />
+                            <entry key="sourceFile" value="G:\00_KULIAH\BANGKIT\00_CAPSTONE UI\00_DEVELOPING\ic_delete.svg" />
                           </map>
                         </option>
                       </PersistentState>

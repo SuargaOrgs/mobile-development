@@ -85,5 +85,22 @@
     <string name="profile">Profil</string>
     <string name="riwayat">Riwayat</string>
     <string name="scanMakanan">Scan Makanan</string>
+    <string name="resultScanText">Hasil Scan</string>
+    <string name="tv_food_nama">Beri nama makanan</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="food_time">Waktu Makan</string>
+    <string name="time_morning">Pagi</string>
+    <string name="time_afternoon">Siang</string>
+    <string name="time_night">Malam</string>
+    <string name="tv_food_list">Daftar Makanan</string>
+    <string name="tv_desc_daftar_makanan">Tambahkan makanan dengan menekan tombol di bawah ini</string>
+    <string name="tambah_manual">+ Tambah Manual</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="skip">Lewati</string>
+    <string name="btn_read_mote">Baca Sekarang</string>
+    <string name="tv_desc_artikel">Ayo baca pilihan artikel untuk kesehatan bayi dan ibu yang kami sediakan!</string>
+    <string name="tv_learn_button">Pelajari perkembangan bayi, Ibu</string>
+    <string name="tv_nutrition_total">Total Nutrisi</string>
 
 </resources>

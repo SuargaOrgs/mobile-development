@@ -29,6 +29,5 @@ class MyButtonWhite : AppCompatButton {
         setTextColor(txtColor)
         textSize = 12f
         gravity = Gravity.CENTER
-        text = "Lewati"
     }
 }

@@ -1,18 +1,19 @@
 package com.dicoding.suargaapp.ui.camera
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.dicoding.suargaapp.databinding.ActivityCameraBinding
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -20,13 +21,17 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.dicoding.suargaapp.databinding.ActivityCameraBinding
+import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.utils.createCustomTempFile
-
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
+    private var currentImageUri: Uri? = null
+    private var isFlashEnabled = false
+
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -38,11 +43,13 @@ class CameraActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
         }
+
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
             this,
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
@@ -53,6 +60,31 @@ class CameraActivity : AppCompatActivity() {
         }
 
         binding.captureImage.setOnClickListener { takePhoto() }
+        binding.galeryButton.setOnClickListener { startGallery() }
+        binding.flashButton.setOnClickListener { toggleFlash() }
+
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            openResultActivity(uri)
+        } else {
+            Log.d("Photo Picker", "No media selected")
+        }
+    }
+
+    private fun openResultActivity(imageUri: Uri) {
+        val intent = Intent(this, ResultScanActivity::class.java).apply {
+            putExtra(EXTRA_CAMERAX_IMAGE, imageUri.toString())
+        }
+        startActivity(intent)
     }
 
     public override fun onResume() {
@@ -106,9 +138,10 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val intent = Intent()
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
-                    setResult(CAMERAX_RESULT, intent)
+                    val savedUri = output.savedUri ?: photoFile.toUri()
+                    val intent = Intent(this@CameraActivity, ResultScanActivity::class.java)
+                    intent.putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
+                    startActivity(intent)
                     finish()
                 }
 
@@ -137,9 +170,19 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun toggleFlash() {
+        isFlashEnabled = !isFlashEnabled
+        imageCapture?.flashMode = if (isFlashEnabled) {
+            ImageCapture.FLASH_MODE_ON
+        } else {
+            ImageCapture.FLASH_MODE_OFF
+        }
+        val flashStatus = if (isFlashEnabled) "Flash Enabled" else "Flash Disabled"
+        Toast.makeText(this, flashStatus, Toast.LENGTH_SHORT).show()
+    }
+
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
-        const val CAMERAX_RESULT = 200
     }
 }
