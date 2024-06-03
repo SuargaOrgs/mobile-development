@@ -2,20 +2,24 @@
 
 Progress
 
-<b> Week 0 </b>
+<b> Week 1 </b>
 - Login: Done
 - Register: Done 
 - On Boarding: Done
 
-<b> Week 1 </b>
+<b> Week 2 </b>
 - Self Assesment : Done
+- Home: Done
+
+<b> Week 3 </b>
+- Nutrition: Ongoing
 
 <b> Note </b>
+- Kode masih berantakan (yoga)
 - Alert dialog masih kasaran masih template (yoga)
 - ID belum diperbaiki (masih kasaran) (yoga & faishal)
-- Keknya backend nya belom rapi dehh nanti aku cek lagi (yoga)
 - toggle password yang hilang saat input masih salah (faishal)
 - Masih ada log dalam result activity (yoga) 
 - Masih ada bug di bagian dropdown ada yang masih belum bisa dipencet (Faishal)
-- SMasih belum bisa menampilkan apakah user sudah mengisi asesmen atau belum (yoga)
+- checklist ingat saya di login masih belum ada fungsinya
   
