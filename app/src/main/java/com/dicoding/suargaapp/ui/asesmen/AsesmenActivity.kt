@@ -80,7 +80,6 @@ class AsesmenActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        // Pindahkan pengguna ke MainActivity dan hapus stack activity sebelumnya
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)

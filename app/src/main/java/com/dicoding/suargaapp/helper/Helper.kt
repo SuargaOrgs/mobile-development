@@ -33,4 +33,41 @@ object Helper {
 
         return diffInDays / 7
     }
+
+    fun getCurrentDate(): String {
+        val calendar = Calendar.getInstance()
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH)
+        val year = calendar.get(Calendar.YEAR)
+
+        val dayOfWeekString = when (dayOfWeek) {
+            Calendar.SUNDAY -> "Minggu"
+            Calendar.MONDAY -> "Senin"
+            Calendar.TUESDAY -> "Selasa"
+            Calendar.WEDNESDAY -> "Rabu"
+            Calendar.THURSDAY -> "Kamis"
+            Calendar.FRIDAY -> "Jumat"
+            Calendar.SATURDAY -> "Sabtu"
+            else -> ""
+        }
+
+        val monthString = when (month) {
+            Calendar.JANUARY -> "Januari"
+            Calendar.FEBRUARY -> "Februari"
+            Calendar.MARCH -> "Maret"
+            Calendar.APRIL -> "April"
+            Calendar.MAY -> "Mei"
+            Calendar.JUNE -> "Juni"
+            Calendar.JULY -> "Juli"
+            Calendar.AUGUST -> "Agustus"
+            Calendar.SEPTEMBER -> "September"
+            Calendar.OCTOBER -> "Oktober"
+            Calendar.NOVEMBER -> "November"
+            Calendar.DECEMBER -> "Desember"
+            else -> ""
+        }
+
+        return "$dayOfWeekString, $dayOfMonth $monthString $year"
+    }
 }

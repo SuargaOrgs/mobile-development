@@ -20,9 +20,9 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit { preferences ->
             preferences[NAME_KEY] = user.name
             preferences[EMAIL_KEY] = user.email
+            preferences[PREGNANCY_DATE_KEY] = user.pregnancyDate
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
-            preferences[HAS_COMPLETED_ASSESSMENT_KEY] = false
         }
         Log.d("UserPreference", "saveSession: ${preferencesDataStore(name = "session")}")
     }
@@ -32,16 +32,10 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             UserModel(
                 preferences[NAME_KEY] ?: "",
                 preferences[EMAIL_KEY] ?: "",
+                preferences[PREGNANCY_DATE_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false,
-                preferences[HAS_COMPLETED_ASSESSMENT_KEY] ?: false
+                preferences[IS_LOGIN_KEY] ?: false
             )
-        }
-    }
-
-    suspend fun hasCompletedAssessment(assessmentResponse: AssessmentResponse) {
-        dataStore.edit { preferences ->
-            preferences[HAS_COMPLETED_ASSESSMENT_KEY] = true
         }
     }
 
@@ -57,9 +51,9 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
         private val NAME_KEY = stringPreferencesKey("name")
         private val EMAIL_KEY = stringPreferencesKey("email")
+        private val PREGNANCY_DATE_KEY = stringPreferencesKey("pregnancyDate")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
-        private val HAS_COMPLETED_ASSESSMENT_KEY = booleanPreferencesKey("hasCompletedAssessment")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

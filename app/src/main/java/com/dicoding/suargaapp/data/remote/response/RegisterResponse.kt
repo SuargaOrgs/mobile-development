@@ -25,6 +25,9 @@ data class DataRegister(
 	@field:SerializedName("namaLengkap")
 	val namaLengkap: String? = null,
 
+	@field:SerializedName("tanggalKehamilan")
+	val tanggalKehamilan: String? = null,
+
 	@field:SerializedName("token")
 	val token: String? = null
 )

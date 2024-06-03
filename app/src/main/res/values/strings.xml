@@ -103,4 +103,13 @@
     <string name="tv_learn_button">Pelajari perkembangan bayi, Ibu</string>
     <string name="tv_nutrition_total">Total Nutrisi</string>
 
+    <!-- Home Fragment  -->
+    <string name="tv_karbohidrat_max">/ 500 gr</string>
+    <string name="tv_protein_max">/ 500 gr</string>
+    <string name="tv_lemak_max">/ 500 gr</string>
+    <string name="karbohidrat_max">"/ %1$d gr"</string>
+    <string name="protein_max">"/ %1$d gr"</string>
+    <string name="lemak_max">"/ %1$d gr"</string>
+
+
 </resources>

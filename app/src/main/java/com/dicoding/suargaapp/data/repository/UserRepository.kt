@@ -3,6 +3,7 @@ package com.dicoding.suargaapp.data.repository
 import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.pref.UserPreference
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
+import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import com.dicoding.suargaapp.data.remote.retrofit.ApiService
@@ -21,9 +22,12 @@ class UserRepository private constructor(
         val response = apiService.login(email, password)
         if (response.error == false) {
             val name = response.data?.namaLengkap
+            val pregnancy = response.data?.tanggalKehamilan
             val user = response.data?.token?.let { token ->
                 name?.let { name ->
-                    UserModel(name, email, token, true)
+                    pregnancy?.let { pregnancy ->
+                        UserModel(name, email, pregnancy,token, false)
+                    }
                 }
             }
 
@@ -56,14 +60,11 @@ class UserRepository private constructor(
         lemak: Int
     ): AssessmentResponse {
         val response = apiService.saveAssessment(tinggiBadan, beratBadan, aktivitasHarian, faktor, karbohidrat, protein, lemak)
-        if (response.error == false) {
-            userPreference.hasCompletedAssessment(response)
-        }
         return response
     }
 
-    fun hasCompletedAssessment(): Flow<Boolean> {
-        return userPreference.getSession().map { it.hasCompletedAssessment }
+    suspend fun getAssessmentResult(): GetAssessmentResponse {
+        return apiService.getAssessmentResult()
     }
 
     companion object {

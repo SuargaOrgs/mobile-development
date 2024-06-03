@@ -26,8 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment using View Binding
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,22 +38,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupAction() {
-
-//        viewModel.getSession().observe(viewLifecycleOwner) { user ->
-//            if (user.hasCompletedAssessment) {
-//                binding.tvAssessment.text = "sudah mengisi asesmen"
-//            } else {
-//                binding.tvAssessment.text = "belum mengisi asesmen"
-//            }
-//        }
-
-        viewModel.hasCompletedAssessment.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.tvAssessment.text = "sudah mengisi asesmen"
-            } else {
-                binding.tvAssessment.text = "belum mengisi asesmen"
-            }
-        }
 
         binding.btnAssessment.setOnClickListener {
             val intent = Intent(requireContext(), AsesmenActivity::class.java)

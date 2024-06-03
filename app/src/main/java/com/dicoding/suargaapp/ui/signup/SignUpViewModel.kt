@@ -24,9 +24,12 @@ class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
                 val result = repository.register(email, password, fullName, birthday, pregnancyDate)
                 if (result.error == false) {
                     val name = result.data?.namaLengkap
+                    val pregnancy = result.data?.tanggalKehamilan
                     val user = result.data?.token?.let { token ->
                         name?.let { name ->
-                            UserModel(name, email, token, true)
+                            pregnancy?.let { pregnancy ->
+                                UserModel(name, email, pregnancy, token, true)
+                            }
                         }
                     }
 

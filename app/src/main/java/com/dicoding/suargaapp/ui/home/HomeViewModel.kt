@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.suargaapp.data.pref.UserModel
+import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
@@ -13,9 +14,8 @@ class HomeViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
+    suspend fun getAssessmentResult(): GetAssessmentResponse {
+        return repository.getAssessmentResult()
     }
+
 }

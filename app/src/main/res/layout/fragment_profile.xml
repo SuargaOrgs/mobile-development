@@ -40,20 +40,4 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_assessment"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Asesmen"
-        android:textAlignment="center"
-        android:textColor="@color/neutral100"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_assessment" />
-
 </FrameLayout>

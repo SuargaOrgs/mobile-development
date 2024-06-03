@@ -26,10 +26,13 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
                 val response = repository.login(email, password)
                 if (response.error == false) {
                     val name = response.data?.namaLengkap
+                    val pregnancy = response.data?.tanggalKehamilan
                     val user = response.data?.token?.let { token ->
                         name?.let { name ->
-                            // nanti ganti
-                            UserModel(name, email, token, true)
+                            pregnancy?.let { pregnancy ->
+                                // nanti ganti
+                                UserModel(name, email, pregnancy, token, true)
+                            }
                         }
                     }
 
