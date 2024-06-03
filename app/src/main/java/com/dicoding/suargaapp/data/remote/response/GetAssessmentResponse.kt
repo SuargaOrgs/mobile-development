@@ -19,6 +19,9 @@ data class GetAssessmentResponse(
 
 data class DataItem(
 
+	@field:SerializedName("idAssessment")
+	val idAssessment: Int? = null,
+
 	@field:SerializedName("faktor")
 	val faktor: String? = null,
 

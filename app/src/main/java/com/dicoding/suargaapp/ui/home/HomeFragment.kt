@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.suargaapp.R
+import com.dicoding.suargaapp.data.remote.response.DataItem
 import com.dicoding.suargaapp.data.remote.response.ErrorResponse
 import com.dicoding.suargaapp.databinding.FragmentHomeBinding
 import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
@@ -55,9 +56,11 @@ class HomeFragment : Fragment() {
                 if (data != null) {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
 
-                    val sortedData = data.filterNotNull().sortedByDescending { item ->
+                    val sortedData = data.filterNotNull().sortedWith(compareByDescending<DataItem> { item ->
                         item.updatedAt?.let { dateFormat.parse(it) } ?: Date(0)
-                    }
+                    }.thenByDescending { item ->
+                        item.idAssessment
+                    })
 
                     val recentItem = sortedData.firstOrNull()
 

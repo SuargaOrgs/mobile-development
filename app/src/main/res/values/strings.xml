@@ -56,8 +56,8 @@
 
     <string-array name="options_activity">
         <item>Pilihan Aktivitas</item>
-        <item>Istirahat bed rest</item>
-        <item>Bed rest, tapi bisa bergerak terbatas</item>
+        <item>Istirahat Bed Rest</item>
+        <item>Bed Rest dengan aktivitas terbatas</item>
         <item>Turun dari tempat tidur</item>
         <item>Aktivitas sedang</item>
         <item>Aktivitas berat</item>

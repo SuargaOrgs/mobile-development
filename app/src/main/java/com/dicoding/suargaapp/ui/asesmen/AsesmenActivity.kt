@@ -8,13 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.suargaapp.customview.NumberEditText
-import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.databinding.ActivityAsesmenBinding
-import com.dicoding.suargaapp.helper.Helper
 import com.dicoding.suargaapp.helper.Helper.calculateAge
 import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
 import com.dicoding.suargaapp.ui.main.MainActivity
-import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.result.ResultActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
@@ -46,6 +43,9 @@ class AsesmenActivity : AppCompatActivity() {
             val stress = binding.optionFact.getSelectedOption()
             val birthday = intent.getStringExtra("birthday")
             val age = calculateAge(birthday ?: "2003-01-24")
+
+            Log.d("cek", "activity: $activity")
+            Log.d("cek", "stress: $stress")
             Log.d("cek", "age: $age")
 
             val bmr = calculateBMR(height, weight, age)
@@ -96,9 +96,10 @@ class AsesmenActivity : AppCompatActivity() {
         val activity = binding.optionActivity.getSelectedOption()
         val stress = binding.optionFact.getSelectedOption()
 
+
         val activityFactor = when (activity) {
-            "Istirahat bed rest" -> 1.1
-            "Bed rest, tapi bisa bergerak terbatas" -> 1.2
+            "Istirahat Bed Rest" -> 1.1
+            "Bed Rest dengan aktivitas terbatas" -> 1.2
             "Turun dari tempat tidur" -> 1.3
             "Aktivitas sedang" -> 1.4
             "Aktivitas berat" -> 1.75
