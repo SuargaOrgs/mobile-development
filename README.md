@@ -22,4 +22,6 @@ Progress
 - Masih ada log dalam result activity (yoga) 
 - Masih ada bug di bagian dropdown ada yang masih belum bisa dipencet (Faishal)
 - checklist ingat saya di login masih belum ada fungsinya
+- Back button pada result scan activity belum bisa (faishal)
+- Coba cek fungsi untuk mencari token (yoga)
   
