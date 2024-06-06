@@ -16,6 +16,7 @@ import com.dicoding.suargaapp.databinding.FragmentHomeBinding
 import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
 import com.dicoding.suargaapp.helper.Helper.getCurrentDate
 import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
+import com.dicoding.suargaapp.ui.login.LoginActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAction()
         observeViewModel()
+        observeToken()
         binding.tvCalendar.text = getCurrentDate()
     }
 
@@ -98,6 +100,22 @@ class HomeFragment : Fragment() {
                 tvExpectedBirth.text = expectedBirth.toString()
             }
         }
+    }
+
+    private fun observeToken() {
+        lifecycleScope.launch {
+            homeViewModel.getToken().collect { token ->
+                if (token.isNullOrEmpty()) {
+                    redirectToLogin()
+                }
+            }
+        }
+    }
+
+    private fun redirectToLogin() {
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun showLoading(isLoading: Boolean) {

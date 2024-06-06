@@ -10,9 +10,14 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
+
+private val _tokenFlow = MutableStateFlow<String?>(null)
+val tokenFlow: StateFlow<String?> = _tokenFlow
 
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
@@ -24,6 +29,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
         }
+        _tokenFlow.value = user.token
         Log.d("UserPreference", "saveSession: ${preferencesDataStore(name = "session")}")
     }
 
@@ -39,10 +45,15 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    fun getToken(): Flow<String?> {
+        return tokenFlow
+    }
+
     suspend fun logout() {
         dataStore.edit { preferences ->
             preferences.clear()
         }
+        _tokenFlow.value = null
     }
 
     companion object {

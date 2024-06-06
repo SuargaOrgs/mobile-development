@@ -6,9 +6,11 @@ import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
+import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
 import com.dicoding.suargaapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MultipartBody
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
@@ -46,6 +48,10 @@ class UserRepository private constructor(
         return userPreference.getSession()
     }
 
+    fun getToken(): Flow<String?> {
+        return userPreference.getToken()
+    }
+
     suspend fun logout() {
         userPreference.logout()
     }
@@ -65,6 +71,10 @@ class UserRepository private constructor(
 
     suspend fun getAssessmentResult(): GetAssessmentResponse {
         return apiService.getAssessmentResult()
+    }
+
+    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
+        return apiService.uploadImage(file)
     }
 
     companion object {

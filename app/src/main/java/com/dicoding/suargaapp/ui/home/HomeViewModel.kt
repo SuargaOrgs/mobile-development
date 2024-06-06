@@ -7,12 +7,18 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.repository.UserRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: UserRepository) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }
+
+    fun getToken(): Flow<String?> {
+        return repository.getToken()
+    }
+
 
     suspend fun getAssessmentResult(): GetAssessmentResponse {
         return repository.getAssessmentResult()
