@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -21,10 +22,21 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
+import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
 import com.dicoding.suargaapp.databinding.ActivityCameraBinding
 import com.dicoding.suargaapp.ui.resultscan.ErrorScanActivity
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.utils.createCustomTempFile
+import com.dicoding.suargaapp.utils.reduceFileImage
+import com.dicoding.suargaapp.utils.uriToFile
+import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.HttpException
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
@@ -32,6 +44,10 @@ class CameraActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
     private var isFlashEnabled = false
+
+    private val cameraViewModel by viewModels<CameraViewModel> {
+        AuthViewModelFactory.getInstance(this)
+    }
 
 
     private val requestPermissionLauncher =
@@ -83,6 +99,30 @@ class CameraActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
+            val imageFile = uriToFile(uri, this@CameraActivity).reduceFileImage()
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "image",
+                imageFile.name,
+                requestImageFile
+            )
+
+            lifecycleScope.launch {
+                try {
+                    val response = cameraViewModel.uploadImage(imageMultipart)
+                    response.message?.let { message ->
+                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: HttpException) {
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
+                    errorResponse.message?.let { message ->
+                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
             openResultActivity(uri)
         } else {
             Log.d("Photo Picker", "No media selected")
@@ -148,10 +188,31 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: photoFile.toUri()
-                    val intent = Intent(this@CameraActivity, ResultScanActivity::class.java)
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
-                    startActivity(intent)
-                    finish()
+
+                    val imageFile = uriToFile(savedUri, this@CameraActivity).reduceFileImage()
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                        "image",
+                        imageFile.name,
+                        requestImageFile
+                    )
+
+                    lifecycleScope.launch {
+                        try {
+                            val response = cameraViewModel.uploadImage(imageMultipart)
+                            response.message?.let { message ->
+                                Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                            }
+                        } catch (e: HttpException) {
+                            val errorBody = e.response()?.errorBody()?.string()
+                            val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
+                            errorResponse.message?.let { message ->
+                                Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    openResultActivity(savedUri)
                 }
 
                 override fun onError(exc: ImageCaptureException) {

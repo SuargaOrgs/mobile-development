@@ -15,11 +15,6 @@ class HomeViewModel(private val repository: UserRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-    fun getToken(): Flow<String?> {
-        return repository.getToken()
-    }
-
-
     suspend fun getAssessmentResult(): GetAssessmentResponse {
         return repository.getAssessmentResult()
     }

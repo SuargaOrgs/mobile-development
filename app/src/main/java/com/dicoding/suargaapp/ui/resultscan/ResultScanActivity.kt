@@ -5,11 +5,9 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityResultScanBinding
 import com.dicoding.suargaapp.ui.addfood.AddFoodActivity
 import com.dicoding.suargaapp.ui.camera.CameraActivity

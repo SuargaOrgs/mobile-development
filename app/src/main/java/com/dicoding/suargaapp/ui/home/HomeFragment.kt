@@ -2,6 +2,7 @@ package com.dicoding.suargaapp.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAction()
         observeViewModel()
-        observeToken()
         binding.tvCalendar.text = getCurrentDate()
     }
 
@@ -75,13 +75,18 @@ class HomeFragment : Fragment() {
                     }
                 }
             } catch (e: HttpException) {
-                val jsonInString = e.response()?.errorBody()?.string()
-                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
-                val errorMessage = errorBody.message
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-                val intent = Intent(requireContext(), AsesmenActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+                if (e.code() == 401) {
+                    Toast.makeText(requireContext(), "Session expired. Please login again.", Toast.LENGTH_SHORT).show()
+                    redirectToLogin()
+                } else {
+                    val jsonInString = e.response()?.errorBody()?.string()
+                    val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                    val errorMessage = errorBody.message
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireContext(), AsesmenActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
             } finally {
                 showLoading(false)
             }
@@ -98,16 +103,6 @@ class HomeFragment : Fragment() {
                 tvGreeting.text = greetings
                 tvPregnancyAge.text = pregnancyAge.toString()
                 tvExpectedBirth.text = expectedBirth.toString()
-            }
-        }
-    }
-
-    private fun observeToken() {
-        lifecycleScope.launch {
-            homeViewModel.getToken().collect { token ->
-                if (token.isNullOrEmpty()) {
-                    redirectToLogin()
-                }
             }
         }
     }
