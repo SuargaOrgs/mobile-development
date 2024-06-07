@@ -22,6 +22,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.dicoding.suargaapp.databinding.ActivityCameraBinding
+import com.dicoding.suargaapp.ui.resultscan.ErrorScanActivity
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.utils.createCustomTempFile
 
@@ -63,6 +64,14 @@ class CameraActivity : AppCompatActivity() {
         binding.galeryButton.setOnClickListener { startGallery() }
         binding.flashButton.setOnClickListener { toggleFlash() }
 
+        setupAction()
+    }
+
+    private fun setupAction() {
+        binding.errorButton.setOnClickListener{
+            val intent = Intent(this, ErrorScanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun startGallery() {

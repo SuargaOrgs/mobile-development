@@ -6,7 +6,7 @@ import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
-import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
+//import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
 import com.dicoding.suargaapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -73,9 +73,9 @@ class UserRepository private constructor(
         return apiService.getAssessmentResult()
     }
 
-    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
-        return apiService.uploadImage(file)
-    }
+//    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
+//        return apiService.uploadImage(file)
+//    }
 
     companion object {
         fun getInstance(

@@ -104,12 +104,18 @@
     <string name="tv_nutrition_total">Total Nutrisi</string>
 
     <!-- Home Fragment  -->
-    <string name="tv_karbohidrat_max">/ 500 gr</string>
-    <string name="tv_protein_max">/ 500 gr</string>
-    <string name="tv_lemak_max">/ 500 gr</string>
+    <string name="tv_karbohidrat_max">/ 0 gr</string>
+    <string name="tv_protein_max">/ 0 gr</string>
+    <string name="tv_lemak_max">/ 0 gr</string>
     <string name="karbohidrat_max">"/ %1$d gr"</string>
     <string name="protein_max">"/ %1$d gr"</string>
     <string name="lemak_max">"/ %1$d gr"</string>
+    <string name="tv_error_result">Maaf, kami tidak dapat mendeteksi makanan tersebut :(</string>
+    <string name="tv_desc_error">Makanan yang kamu scan tidak dapat kami deteksi, hal ini dikarenakan foto makanan tersebut yang kurang jelas atau makanan tersebut belum tersedia di sistem kami.</string>
+    <string name="btn_log_manual">Isi Log Manual</string>
+    <string name="btn_back_scan">Kembali ke Scan</string>
+    <string name="tv_add_food">Tambah Makanan</string>
+    <string name="tv_porsi_makan">Jumlah Porsi Makan</string>
 
 
 </resources>

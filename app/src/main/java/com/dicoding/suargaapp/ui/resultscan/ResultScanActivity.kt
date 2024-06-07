@@ -1,5 +1,6 @@
 package com.dicoding.suargaapp.ui.resultscan
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityResultScanBinding
+import com.dicoding.suargaapp.ui.addfood.AddFoodActivity
 import com.dicoding.suargaapp.ui.camera.CameraActivity
 
 class ResultScanActivity : AppCompatActivity() {
@@ -46,6 +48,9 @@ class ResultScanActivity : AppCompatActivity() {
         binding.rvFoodList.adapter = adapter
 
         binding.btnAddFood.setOnClickListener {
+            val intent = Intent(this, AddFoodActivity::class.java)
+            startActivity(intent)
+            // Kode menambahkan makanan sementara
             val newFood = "Nama Makanan"
             foodList.add(newFood)
             adapter.notifyItemInserted(foodList.size - 1)
@@ -55,6 +60,20 @@ class ResultScanActivity : AppCompatActivity() {
         imageUriString?.let {
             val imageUri = Uri.parse(it)
             binding.ivImgMakanan.setImageURI(imageUri)
+        }
+
+        setupAction()
+    }
+
+    private fun setupAction() {
+
+        setSupportActionBar(binding.topAppBar)
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+        binding.buttonCancel.setOnClickListener{
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
         }
     }
 
