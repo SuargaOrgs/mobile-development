@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -99,31 +100,7 @@ class CameraActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            val imageFile = uriToFile(uri, this@CameraActivity).reduceFileImage()
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "image",
-                imageFile.name,
-                requestImageFile
-            )
-
-            lifecycleScope.launch {
-                try {
-                    val response = cameraViewModel.uploadImage(imageMultipart)
-                    response.message?.let { message ->
-                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: HttpException) {
-                    val errorBody = e.response()?.errorBody()?.string()
-                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
-                    errorResponse.message?.let { message ->
-                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            openResultActivity(uri)
+            uploadImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -182,37 +159,15 @@ class CameraActivity : AppCompatActivity() {
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
+        showLoading(true)
+
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = output.savedUri ?: photoFile.toUri()
-
-                    val imageFile = uriToFile(savedUri, this@CameraActivity).reduceFileImage()
-                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-                    val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                        "image",
-                        imageFile.name,
-                        requestImageFile
-                    )
-
-                    lifecycleScope.launch {
-                        try {
-                            val response = cameraViewModel.uploadImage(imageMultipart)
-                            response.message?.let { message ->
-                                Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                            }
-                        } catch (e: HttpException) {
-                            val errorBody = e.response()?.errorBody()?.string()
-                            val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
-                            errorResponse.message?.let { message ->
-                                Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-
-                    openResultActivity(savedUri)
+                    currentImageUri = output.savedUri ?: photoFile.toUri()
+                    uploadImage()
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -225,6 +180,38 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun uploadImage() {
+        currentImageUri?.let { uri ->
+            val imageFile = uriToFile(uri, this@CameraActivity).reduceFileImage()
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "image",
+                imageFile.name,
+                requestImageFile
+            )
+
+            lifecycleScope.launch {
+                try {
+                    val response = cameraViewModel.uploadImage(imageMultipart)
+                    response.message?.let { message ->
+                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: HttpException) {
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
+                    errorResponse.message?.let { message ->
+                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                    }
+                } finally {
+                    showLoading(false)
+                }
+            }
+
+            openResultActivity(uri)
+        }
     }
 
     private fun hideSystemUI() {
@@ -249,6 +236,10 @@ class CameraActivity : AppCompatActivity() {
         }
         val flashStatus = if (isFlashEnabled) "Flash Enabled" else "Flash Disabled"
         Toast.makeText(this, flashStatus, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {
