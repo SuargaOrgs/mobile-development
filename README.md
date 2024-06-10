@@ -25,4 +25,5 @@ Progress
 - Back button pada result scan activity belum bisa (faishal)
 - Coba cek fungsi untuk mencari token (yoga)
 - API Upload masih testing (yoga)
+- Halaman article masih belum mepunyai database dan masih kasaran (Faishal)
   
