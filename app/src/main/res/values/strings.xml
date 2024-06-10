@@ -116,6 +116,10 @@
     <string name="btn_back_scan">Kembali ke Scan</string>
     <string name="tv_add_food">Tambah Makanan</string>
     <string name="tv_porsi_makan">Jumlah Porsi Makan</string>
+    <string name="kuliner_name">Judul Artikel</string>
+    <string name="tempatloc">Deskripsi Artikel</string>
+    <string name="desc_artikel">Deskripsi Artikel</string>
+    <string name="article_title">Judul Artikel</string>
 
 
 </resources>
