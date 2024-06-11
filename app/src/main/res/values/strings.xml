@@ -120,6 +120,7 @@
     <string name="tempatloc">Deskripsi Artikel</string>
     <string name="desc_artikel">Deskripsi Artikel</string>
     <string name="article_title">Judul Artikel</string>
+    <string name="tv_history_date">Tanggal Makan</string>
 
 
 </resources>

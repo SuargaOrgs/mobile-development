@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,8 +17,8 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="18sp"
+        android:text="@string/article_title"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp" />
 
@@ -25,8 +26,10 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:text="@string/desc_artikel"
+        android:maxLines="4"
+        android:textSize="8sp"
+        android:layout_marginTop="4dp"
+        tools:ignore="SmallSp" />
 
 </LinearLayout>
