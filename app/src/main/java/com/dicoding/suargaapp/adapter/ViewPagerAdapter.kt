@@ -1,4 +1,4 @@
-package com.dicoding.suargaapp.ui.article
+package com.dicoding.suargaapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dicoding.suargaapp.R
-import com.dicoding.suargaapp.data.pref.Article
+import com.dicoding.suargaapp.data.local.Article
+
 
 class ViewPagerAdapter(private val context: Context, private val itemList: List<Article>) : RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
 
@@ -25,9 +27,11 @@ class ViewPagerAdapter(private val context: Context, private val itemList: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
-        holder.imageView.setImageResource(item.photoResId)
         holder.textViewTitle.text = item.title
         holder.textViewDescription.text = item.description
+        Glide.with(context)
+            .load(item.image)
+            .into(holder.imageView)
     }
 
     override fun getItemCount(): Int = itemList.size

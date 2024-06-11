@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -79,4 +81,11 @@ dependencies {
     //Viewpager2
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
 
+    //room
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    
 }
