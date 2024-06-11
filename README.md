@@ -14,6 +14,9 @@ Progress
 <b> Week 3 </b>
 - Nutrition: Ongoing
 
+<b> Week 3 </b>
+- Article: Ongoing
+
 <b> Note </b>
 - Kode masih berantakan (yoga)
 - Alert dialog masih kasaran masih template (yoga)
@@ -26,4 +29,4 @@ Progress
 - Coba cek fungsi untuk mencari token (yoga)
 - API Upload masih testing (yoga)
 - Halaman article masih belum mepunyai database dan masih kasaran (Faishal)
-  
+- Artikel sudah database tinggal dirapikan lagi (yoga)
