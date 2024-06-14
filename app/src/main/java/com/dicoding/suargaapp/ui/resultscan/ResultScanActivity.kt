@@ -43,8 +43,14 @@ class ResultScanActivity : AppCompatActivity() {
             )
 
             foodList.add(newFood)
-            binding.tvTotalKaloriLabel.text = "Karbohidrat"
-            binding.tvTotalKaloriValue.text = "$carbohydrate gr"
+            binding.tvTotalCarboLabel.text = "Karbohidrat"
+            binding.tvTotalCarboValue.text = "$carbohydrate gr"
+            binding.tvTotalLemakLabel.text = "Lemak"
+            binding.tvTotalLemakValue.text = "$fat gr"
+            binding.tvTotalProteinLabel.text = "Protein"
+            binding.tvTotalProteinValue.text = "$protein gr"
+            binding.tvTotalVitaminLabel.text = "Vitamin"
+            binding.tvTotalVitaminValue.text = "$vitamin"
             binding.btnAddFood.visibility = View.GONE
         }
 
@@ -113,10 +119,13 @@ class ResultScanActivity : AppCompatActivity() {
 
     private fun updateNutritionValues() {
         if (foodList.isEmpty()) {
-            binding.tvTotalKaloriValue.text = "0.00 gr"
+            binding.tvTotalCarboValue.text = "0.00 gr"
+            binding.tvTotalLemakValue.text = "0.00 gr"
+            binding.tvTotalProteinValue.text = "0.00 gr"
+            binding.tvTotalVitaminValue.text = "-"
             binding.btnAddFood.visibility = View.VISIBLE // Tampilkan tombol tambah makanan kembali jika daftar makanan kosong
         } else {
-            binding.tvTotalKaloriValue.text = foodList.sumByDouble { it.karbohidrat ?: 0.0 }.toString()
+            binding.tvTotalCarboValue.text = foodList.sumByDouble { it.karbohidrat ?: 0.0 }.toString()
         }
     }
 }

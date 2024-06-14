@@ -68,7 +68,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="4dp"
-                android:hint="@string/food_name"
+                android:hint="@string/activity_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_food_name"
@@ -188,19 +188,20 @@
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/button_background_add"
                 android:text="@string/tambah_manual"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/total_carbo_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_desc_daftar_makanan" />
 
-            <!-- Total Kalori Container -->
+            <!-- Total Nutrisi Container -->
+            <!-- Carbo Container -->
             <LinearLayout
-                android:id="@+id/total_kalori_container"
+                android:id="@+id/total_carbo_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="58dp"
                 android:background="@color/primary20"
                 android:orientation="horizontal"
                 android:padding="8dp"
@@ -209,17 +210,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_add_food">
 
                 <TextView
-                    android:id="@+id/tv_total_kalori_label"
+                    android:id="@+id/tv_total_carbo_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:text="@string/tv_nutrition_total"
+                    android:text="@string/tv_carbo_total"
                     android:textColor="@color/primary70"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tv_total_kalori_value"
+                    android:id="@+id/tv_total_carbo_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -227,6 +228,114 @@
                     android:text="0.00 gr"
                     android:textColor="@color/primary70"
                     android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Lemak Container -->
+            <LinearLayout
+                android:id="@+id/total_lemak_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/primary20"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginTop="1dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_carbo_container">
+
+                <TextView
+                    android:id="@+id/tv_total_lemak_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tv_lemak_total"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_lemak_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="0.00 gr"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Protein Container -->
+            <LinearLayout
+                android:id="@+id/total_protein_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/primary20"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
+                android:padding="8dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_lemak_container">
+
+                <TextView
+                    android:id="@+id/tv_total_protein_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tv_protein_total"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_protein_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="0.00 gr"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Vitamin Container -->
+            <LinearLayout
+                android:id="@+id/total_vitamin_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/primary20"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
+                android:padding="8dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_protein_container">
+
+                <TextView
+                    android:id="@+id/tv_total_vitamin_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tv_vitamin_total"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_vitamin_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="vitamin"
+                    android:textColor="@color/primary70"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Guideline untuk menengahkan tombol -->
@@ -253,7 +362,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline_center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total_kalori_container"
+                app:layout_constraintTop_toBottomOf="@+id/total_vitamin_container"
                 tools:ignore="MissingConstraints" />
 
             <com.dicoding.suargaapp.customview.MyButton
@@ -269,7 +378,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline_center"
-                app:layout_constraintTop_toBottomOf="@+id/total_kalori_container"
+                app:layout_constraintTop_toBottomOf="@+id/total_vitamin_container"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

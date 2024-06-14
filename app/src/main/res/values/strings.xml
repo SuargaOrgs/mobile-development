@@ -86,7 +86,7 @@
     <string name="riwayat">Riwayat</string>
     <string name="scanMakanan">Scan Makanan</string>
     <string name="resultScanText">Hasil Scan</string>
-    <string name="tv_food_nama">Beri nama makanan</string>
+    <string name="tv_food_nama">Beri nama aktivitas</string>
     <string name="food_name">Nama Makanan</string>
     <string name="food_time">Waktu Makan</string>
     <string name="time_morning">Pagi</string>
@@ -121,6 +121,11 @@
     <string name="desc_artikel">Deskripsi Artikel</string>
     <string name="article_title">Judul Artikel</string>
     <string name="tv_history_date">Tanggal Makan</string>
+    <string name="activity_name">Nama Aktivitas</string>
+    <string name="tv_carbo_total">Total Karbohidrat</string>
+    <string name="tv_lemak_total">Total Lemak</string>
+    <string name="tv_protein_total">Total Protein</string>
+    <string name="tv_vitamin_total">Total Vitamin</string>
 
 
 </resources>
