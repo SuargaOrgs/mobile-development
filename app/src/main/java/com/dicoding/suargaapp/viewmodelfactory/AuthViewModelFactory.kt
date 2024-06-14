@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.suargaapp.data.repository.UserRepository
 import com.dicoding.suargaapp.di.Injection
+import com.dicoding.suargaapp.ui.addfood.AddFoodViewModel
 import com.dicoding.suargaapp.ui.asesmen.AssessmentViewModel
 import com.dicoding.suargaapp.ui.camera.CameraViewModel
 import com.dicoding.suargaapp.ui.home.HomeViewModel
@@ -38,6 +39,9 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
                 CameraViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(AddFoodViewModel::class.java) -> {
+                AddFoodViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

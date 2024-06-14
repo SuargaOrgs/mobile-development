@@ -2,6 +2,7 @@ package com.dicoding.suargaapp.data.remote.retrofit
 
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
+import com.dicoding.suargaapp.data.remote.response.ListFoodResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
@@ -47,10 +48,13 @@ interface ApiService {
     @GET("assessment")
     suspend fun getAssessmentResult(): GetAssessmentResponse
 
-    @Multipart
-    @POST("https://suarga-app-dev-api.vercel.app/uploadGambar")
-    suspend fun uploadImage(
-        @Part file: MultipartBody.Part
-    ): UploadImageResponse
+//    @Multipart
+//    @POST("https://suarga-app-dev-api.vercel.app/uploadGambar")
+//    suspend fun uploadImage(
+//        @Part file: MultipartBody.Part
+//    ): UploadImageResponse
+
+    @GET("nutrition/foodStorage")
+    suspend fun listFood() : ListFoodResponse
 
 }

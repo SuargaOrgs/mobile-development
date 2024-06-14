@@ -193,22 +193,22 @@ class CameraActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-            lifecycleScope.launch {
-                try {
-                    val response = cameraViewModel.uploadImage(imageMultipart)
-                    response.message?.let { message ->
-                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: HttpException) {
-                    val errorBody = e.response()?.errorBody()?.string()
-                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
-                    errorResponse.message?.let { message ->
-                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-                    }
-                } finally {
-                    showLoading(false)
-                }
-            }
+//            lifecycleScope.launch {
+//                try {
+//                    val response = cameraViewModel.uploadImage(imageMultipart)
+//                    response.message?.let { message ->
+//                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+//                    }
+//                } catch (e: HttpException) {
+//                    val errorBody = e.response()?.errorBody()?.string()
+//                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
+//                    errorResponse.message?.let { message ->
+//                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+//                    }
+//                } finally {
+//                    showLoading(false)
+//                }
+//            }
 
             openResultActivity(uri)
         }

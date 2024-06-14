@@ -4,6 +4,7 @@ import com.dicoding.suargaapp.data.pref.UserModel
 import com.dicoding.suargaapp.data.pref.UserPreference
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
+import com.dicoding.suargaapp.data.remote.response.ListFoodResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
 import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
@@ -68,8 +69,12 @@ class UserRepository private constructor(
         return apiService.getAssessmentResult()
     }
 
-    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
-        return apiService.uploadImage(file)
+//    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
+//        return apiService.uploadImage(file)
+//    }
+
+    suspend fun listFood() : ListFoodResponse {
+        return apiService.listFood()
     }
 
     companion object {

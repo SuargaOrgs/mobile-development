@@ -7,7 +7,7 @@ import okhttp3.MultipartBody
 
 class CameraViewModel(private val repository: UserRepository) : ViewModel() {
 
-    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
-        return repository.uploadImage(file)
-    }
+//    suspend fun uploadImage(file: MultipartBody.Part): UploadImageResponse {
+//        return repository.uploadImage(file)
+//    }
 }
