@@ -39,11 +39,6 @@ class ProfileFragment : Fragment() {
 
     private fun setupAction() {
 
-        binding.btnAssessment.setOnClickListener {
-            val intent = Intent(requireContext(), AsesmenActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.buttonLogout.setOnClickListener {
             viewModel.logout()
         }

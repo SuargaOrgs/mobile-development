@@ -88,8 +88,6 @@ class HomeFragment : Fragment() {
                     startActivity(intent)
                     requireActivity().finish()
                 }
-            } finally {
-                showLoading(false)
             }
         }
 
