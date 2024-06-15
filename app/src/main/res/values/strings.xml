@@ -104,9 +104,15 @@
     <string name="tv_nutrition_total">Total Nutrisi</string>
 
     <!-- Home Fragment  -->
+    <string name="tv_karbohidrat_min">0</string>
+    <string name="tv_protein_min">0</string>
+    <string name="tv_lemak_min">0</string>
     <string name="tv_karbohidrat_max">/ 0 gr</string>
     <string name="tv_protein_max">/ 0 gr</string>
     <string name="tv_lemak_max">/ 0 gr</string>
+    <string name="karbohidrat_min">"%1$d"</string>
+    <string name="protein_min">"%1$d"</string>
+    <string name="lemak_min">"%1$d"</string>
     <string name="karbohidrat_max">"/ %1$d gr"</string>
     <string name="protein_max">"/ %1$d gr"</string>
     <string name="lemak_max">"/ %1$d gr"</string>
@@ -122,10 +128,10 @@
     <string name="article_title">Judul Artikel</string>
     <string name="tv_history_date">Tanggal Makan</string>
     <string name="activity_name">Nama Aktivitas</string>
-    <string name="tv_carbo_total">Total Karbohidrat</string>
-    <string name="tv_lemak_total">Total Lemak</string>
-    <string name="tv_protein_total">Total Protein</string>
-    <string name="tv_vitamin_total">Total Vitamin</string>
+    <string name="tv_carbo_total">Karbohidrat</string>
+    <string name="tv_lemak_total">Lemak</string>
+    <string name="tv_protein_total">Protein</string>
+    <string name="tv_vitamin_total">Vitamin</string>
 
 
 </resources>

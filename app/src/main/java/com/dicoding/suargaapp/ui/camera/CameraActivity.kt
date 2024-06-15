@@ -23,21 +23,11 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.lifecycle.lifecycleScope
-import com.dicoding.suargaapp.data.remote.response.UploadImageResponse
+import androidx.lifecycle.ViewModelProvider
 import com.dicoding.suargaapp.databinding.ActivityCameraBinding
 import com.dicoding.suargaapp.ui.resultscan.ErrorScanActivity
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.utils.createCustomTempFile
-import com.dicoding.suargaapp.utils.reduceFileImage
-import com.dicoding.suargaapp.utils.uriToFile
-import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
-import com.google.gson.Gson
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit2.HttpException
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
@@ -45,11 +35,6 @@ class CameraActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
     private var isFlashEnabled = false
-
-    private val cameraViewModel by viewModels<CameraViewModel> {
-        AuthViewModelFactory.getInstance(this)
-    }
-
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -184,33 +169,8 @@ class CameraActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         currentImageUri?.let { uri ->
-            val imageFile = uriToFile(uri, this@CameraActivity).reduceFileImage()
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "image",
-                imageFile.name,
-                requestImageFile
-            )
-
-//            lifecycleScope.launch {
-//                try {
-//                    val response = cameraViewModel.uploadImage(imageMultipart)
-//                    response.message?.let { message ->
-//                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-//                    }
-//                } catch (e: HttpException) {
-//                    val errorBody = e.response()?.errorBody()?.string()
-//                    val errorResponse = Gson().fromJson(errorBody, UploadImageResponse::class.java)
-//                    errorResponse.message?.let { message ->
-//                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
-//                    }
-//                } finally {
-//                    showLoading(false)
-//                }
-//            }
-
             openResultActivity(uri)
+            showLoading(false)
         }
     }
 

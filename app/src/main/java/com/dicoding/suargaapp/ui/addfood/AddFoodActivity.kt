@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.data.remote.response.Food
 import com.dicoding.suargaapp.databinding.ActivityAddFoodBinding
-import com.dicoding.suargaapp.databinding.ActivityAsesmenBinding
-import com.dicoding.suargaapp.ui.camera.CameraActivity
+import com.dicoding.suargaapp.ui.camera.CameraActivity.Companion.EXTRA_CAMERAX_IMAGE
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
@@ -72,18 +70,25 @@ class AddFoodActivity : AppCompatActivity() {
     }
 
     private fun displayFoodNutrients(food: Food) {
+        val id = food.id
         val nameFood = food.namaMakanan
-        val carbohydrate = food.karbohidrat.toString()
-        val protein = food.protein.toString()
-        val fat = food.lemak.toString()
+        val portion = binding.portionEditText.text.toString().toInt()
+        val carbohydrate = (food.karbohidrat?.times(portion))
+        val protein = food.protein?.times(portion)
+        val fat = food.lemak?.times(portion)
         val vitamin = food.vitamin
+        val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
 
-        val intent = Intent(this, ResultScanActivity::class.java)
-        intent.putExtra("nameFood", nameFood)
-        intent.putExtra("carbohydrate", carbohydrate)
-        intent.putExtra("protein", protein)
-        intent.putExtra("fat", fat)
-        intent.putExtra("vitamin", vitamin)
+        val intent = Intent(this, ResultScanActivity::class.java).apply {
+            putExtra("id", id)
+            putExtra("nameFood", nameFood)
+            putExtra("carbohydrate", carbohydrate)
+            putExtra("protein", protein)
+            putExtra("fat", fat)
+            putExtra("vitamin", vitamin)
+            putExtra("portion", portion)
+            putExtra(EXTRA_CAMERAX_IMAGE, imageUriString)
+        }
 
         startActivity(intent)
     }

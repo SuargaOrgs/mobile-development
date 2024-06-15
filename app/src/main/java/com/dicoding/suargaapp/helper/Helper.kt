@@ -2,7 +2,9 @@ package com.dicoding.suargaapp.helper
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 
@@ -70,4 +72,10 @@ object Helper {
 
         return "$dayOfWeekString, $dayOfMonth $monthString $year"
     }
+
+//    fun getCurrentDateTimeInUTC(): String {
+//        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+//        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+//        return dateFormat.format(Date())
+//    }
 }

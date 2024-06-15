@@ -7,11 +7,11 @@ import com.dicoding.suargaapp.data.repository.UserRepository
 import com.dicoding.suargaapp.di.Injection
 import com.dicoding.suargaapp.ui.addfood.AddFoodViewModel
 import com.dicoding.suargaapp.ui.asesmen.AssessmentViewModel
-import com.dicoding.suargaapp.ui.camera.CameraViewModel
 import com.dicoding.suargaapp.ui.home.HomeViewModel
 import com.dicoding.suargaapp.ui.login.LoginViewModel
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.profile.ProfileViewModel
+import com.dicoding.suargaapp.ui.resultscan.ResultScanViewModel
 import com.dicoding.suargaapp.ui.signup.SignUpViewModel
 
 class AuthViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -37,8 +37,8 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             modelClass.isAssignableFrom(AssessmentViewModel::class.java) -> {
                 AssessmentViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
-                CameraViewModel(repository) as T
+            modelClass.isAssignableFrom(ResultScanViewModel::class.java) -> {
+                ResultScanViewModel(repository) as T
             }
             modelClass.isAssignableFrom(AddFoodViewModel::class.java) -> {
                 AddFoodViewModel(repository) as T

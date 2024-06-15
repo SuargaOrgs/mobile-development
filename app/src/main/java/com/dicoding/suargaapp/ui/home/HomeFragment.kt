@@ -25,6 +25,7 @@ import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 class HomeFragment : Fragment() {
     private val homeViewModel by viewModels<HomeViewModel> {
@@ -91,6 +92,43 @@ class HomeFragment : Fragment() {
                 showLoading(false)
             }
         }
+
+        lifecycleScope.launch {
+            try {
+                showLoading(true)
+                val response = homeViewModel.listNutrition()
+                val data = response.data
+
+                if (data != null) {
+                    val currentDateUTC = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply {
+                        timeZone = TimeZone.getTimeZone("UTC")
+                    }.format(Date())
+                    val nutrition = data.filterNotNull().filter {
+                        it.createdAt?.startsWith(currentDateUTC) == true
+                    }.fold(TotalNutrients()) { acc, item ->
+                        acc.apply {
+                            val porsi = item.porsi ?: 1
+                            karbohidrat += (item.karbohidrat ?: 0.0) * porsi
+                            lemak += (item.lemak ?: 0.0) * porsi
+                            protein += (item.protein ?: 0.0) * porsi
+                        }
+                    }
+
+                    binding.apply {
+                        tvKarbohidratMin.text = getString(R.string.karbohidrat_min, (nutrition.karbohidrat.toInt()))
+                        tvProteinMin.text = getString(R.string.protein_min, (nutrition.protein.toInt()))
+                        tvLemakMin.text = getString(R.string.lemak_min, (nutrition.lemak.toInt()))
+                    }
+                }
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                val errorMessage = errorBody.message
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            } finally {
+                showLoading(false)
+            }
+        }
     }
 
     private fun observeViewModel() {
@@ -117,3 +155,9 @@ class HomeFragment : Fragment() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
+
+data class TotalNutrients(
+    var karbohidrat: Double = 0.0,
+    var lemak: Double = 0.0,
+    var protein: Double = 0.0
+)
