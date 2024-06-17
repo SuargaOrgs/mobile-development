@@ -132,6 +132,7 @@
     <string name="tv_lemak_total">Lemak</string>
     <string name="tv_protein_total">Protein</string>
     <string name="tv_vitamin_total">Vitamin</string>
+    <string name="paketPremium">Paket Premium</string>
 
 
 </resources>
