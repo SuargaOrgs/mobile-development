@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.suargaapp.R
@@ -18,6 +19,11 @@ class ViewPagerAdapter(private val context: Context, private val itemList: List<
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
         val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
         val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(context, "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,6 +38,7 @@ class ViewPagerAdapter(private val context: Context, private val itemList: List<
         Glide.with(context)
             .load(item.image)
             .into(holder.imageView)
+
     }
 
     override fun getItemCount(): Int = itemList.size

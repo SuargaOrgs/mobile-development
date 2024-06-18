@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,11 @@ class FoodAdapter(
         val tvFoodName: TextView = itemView.findViewById(R.id.tv_food_name)
         val ivEdit: ImageButton = itemView.findViewById(R.id.iv_edit)
         val ivDelete: ImageButton = itemView.findViewById(R.id.iv_delete)
-
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {

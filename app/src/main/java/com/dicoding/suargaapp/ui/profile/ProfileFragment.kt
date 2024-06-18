@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.dicoding.suargaapp.databinding.FragmentProfileBinding
 import com.dicoding.suargaapp.ui.main.MainViewModel
@@ -42,6 +43,21 @@ class ProfileFragment : Fragment() {
         binding.premiumButton.setOnClickListener {
             val intent = Intent(requireContext(), PremiumActivity::class.java)
             startActivity(intent)
+        }
+        binding.profileButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.changePassButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.assesmentButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.relativeLayout.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+        }
+        binding.relativeLayout3.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.data.local.history.FoodHistoryItem
@@ -30,5 +31,10 @@ class FoodHistoryAdapter(private val foodHistoryList: List<FoodHistoryItem>) :
         val foodIconImageView: ImageView = itemView.findViewById(R.id.iv_food_icon)
         val foodNameTextView: TextView = itemView.findViewById(R.id.tv_food_name)
         val foodDateTextView: TextView = itemView.findViewById(R.id.tv_date_food)
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

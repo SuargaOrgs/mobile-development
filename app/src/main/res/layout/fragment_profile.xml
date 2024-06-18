@@ -149,6 +149,7 @@
 
             <!-- Profil Saya -->
             <RelativeLayout
+                android:id="@+id/profile_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -181,6 +182,7 @@
 
             <!-- Ubah Kata Sandi -->
             <RelativeLayout
+                android:id="@+id/change_pass_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -213,6 +215,7 @@
 
             <!-- Asesmen Diri -->
             <RelativeLayout
+                android:id="@+id/assesment_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"

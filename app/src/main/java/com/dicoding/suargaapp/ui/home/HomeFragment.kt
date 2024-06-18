@@ -175,6 +175,9 @@ class HomeFragment : Fragment() {
                 commit()
             }
         }
+        binding.learnButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

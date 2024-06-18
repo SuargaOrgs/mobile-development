@@ -10,6 +10,7 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_article"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:padding="8dp">

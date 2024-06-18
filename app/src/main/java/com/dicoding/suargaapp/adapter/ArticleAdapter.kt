@@ -2,6 +2,7 @@ package com.dicoding.suargaapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,10 @@ class ArticleAdapter : ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(DI
             Glide.with(binding.root)
                 .load(article.image)
                 .into(binding.imgItemPhoto)
+            // Set OnClickListener to display a toast message
+            binding.root.setOnClickListener {
+                Toast.makeText(binding.root.context, "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

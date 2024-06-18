@@ -3,6 +3,7 @@ package com.dicoding.suargaapp.ui.result
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityResultBinding
 import com.dicoding.suargaapp.ui.main.MainActivity
@@ -41,6 +42,9 @@ class ResultActivity : AppCompatActivity() {
         binding.homeButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+        binding.formulaButton.setOnClickListener {
+            Toast.makeText(this, "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
         }
     }
 }
