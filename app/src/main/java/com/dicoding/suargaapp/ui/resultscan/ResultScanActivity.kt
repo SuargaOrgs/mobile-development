@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.suargaapp.adapter.FoodAdapter
 import com.dicoding.suargaapp.data.remote.response.Food
+import com.dicoding.suargaapp.data.remote.response.ScanPredictResponse
 import com.dicoding.suargaapp.data.remote.response.UploadResponse
 import com.dicoding.suargaapp.databinding.ActivityResultScanBinding
 import com.dicoding.suargaapp.ui.addfood.AddFoodActivity
@@ -30,6 +31,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.HttpException
+import java.io.File
 
 class ResultScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultScanBinding
@@ -44,6 +46,9 @@ class ResultScanActivity : AppCompatActivity() {
         binding = ActivityResultScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupRecyclerView()
+        setupAction()
+
         val id = intent.getIntExtra("id", 0)
         val foodName = intent.getStringExtra("nameFood")
         val portion = intent.getIntExtra("portion", 0)
@@ -53,7 +58,7 @@ class ResultScanActivity : AppCompatActivity() {
         val vitamin = intent.getStringExtra("vitamin")
 
         if (id != 0 && foodName != null) {
-            val newFood = Food(
+            val manualFood = Food(
                 namaMakanan = foodName,
                 karbohidrat = carbohydrate,
                 protein = protein,
@@ -63,12 +68,13 @@ class ResultScanActivity : AppCompatActivity() {
                 id = id
             )
 
-            foodList.add(newFood)
+            foodList.add(manualFood)
             binding.tvTotalCarboValue.text = "$carbohydrate gr"
             binding.tvTotalLemakValue.text = "$fat gr"
             binding.tvTotalProteinValue.text = "$protein gr"
             binding.tvTotalVitaminValue.text = "$vitamin"
             binding.btnAddFood.visibility = View.GONE
+
         }
 
         val activityEditText = binding.activityEditText
@@ -98,7 +104,6 @@ class ResultScanActivity : AppCompatActivity() {
         }
 
         binding.buttonSave.setOnClickListener {
-            Log.d("ResultScanActivity", "Save button clicked")
             if (imageUriString != null) {
                 val imageUri = Uri.parse(imageUriString)
                 Log.d("ResultScanActivity", "Image URI is not null")
@@ -151,14 +156,18 @@ class ResultScanActivity : AppCompatActivity() {
                 Toast.makeText(this, "Image not found", Toast.LENGTH_SHORT).show()
             }
         }
-
-        setupRecyclerView()
-        setupAction()
     }
 
     private fun setupRecyclerView() {
-        adapter = FoodAdapter(foodList, { position ->
-            Toast.makeText(this, "Edit item at position: $position", Toast.LENGTH_SHORT).show()
+        val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
+        adapter = FoodAdapter(foodList, { food ->
+            val intent = Intent(this, AddFoodActivity::class.java).apply {
+                putExtra("id", food.id)
+                putExtra("nameFood", food.namaMakanan)
+                putExtra("portion", 1)
+                putExtra(EXTRA_CAMERAX_IMAGE, imageUriString)
+            }
+            startActivity(intent)
         }, { position ->
             foodList.removeAt(position)
             adapter.notifyItemRemoved(position)
@@ -191,14 +200,12 @@ class ResultScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateNutritionValues() {
-        if (foodList.isEmpty()) {
-            binding.tvTotalCarboValue.text = "0.0 gr"
-            binding.tvTotalLemakValue.text = "0.0 gr"
-            binding.tvTotalProteinValue.text = "0.0 gr"
-            binding.tvTotalVitaminValue.text = "-"
-            binding.btnAddFood.visibility = View.VISIBLE
-        }
+    private fun updateNutritionValues(carbohydrate: Double = 0.0, fat: Double = 0.0, protein: Double = 0.0, vitamin: String? = "-") {
+        binding.tvTotalCarboValue.text = "$carbohydrate gr"
+        binding.tvTotalLemakValue.text = "$fat gr"
+        binding.tvTotalProteinValue.text = "$protein gr"
+        binding.tvTotalVitaminValue.text = vitamin
+        binding.btnAddFood.visibility = if (foodList.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun showLoading(isLoading: Boolean) {

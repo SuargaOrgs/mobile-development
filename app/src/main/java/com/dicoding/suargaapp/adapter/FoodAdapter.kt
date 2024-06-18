@@ -12,11 +12,12 @@ import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.adapter.ArticleAdapter.Companion.DIFF_CALLBACK
 import com.dicoding.suargaapp.data.local.Article
 import com.dicoding.suargaapp.data.remote.response.Food
+import com.dicoding.suargaapp.data.remote.response.Nutrition
 import com.dicoding.suargaapp.databinding.ItemFoodBinding
 
 class FoodAdapter(
     private val foodList: MutableList<Food>,
-    private val onEditClick: (Int) -> Unit,
+    private val onEditClick: (Food) -> Unit,
     private val onDeleteClick: (Int) -> Unit
 ) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
@@ -33,9 +34,9 @@ class FoodAdapter(
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val foodName = foodList[position].namaMakanan
-        holder.tvFoodName.text = foodName
-        holder.ivEdit.setOnClickListener { onEditClick(position) }
+        val food = foodList[position]
+        holder.tvFoodName.text = food.namaMakanan
+        holder.ivEdit.setOnClickListener { onEditClick(food) }
         holder.ivDelete.setOnClickListener { onDeleteClick(position) }
     }
 

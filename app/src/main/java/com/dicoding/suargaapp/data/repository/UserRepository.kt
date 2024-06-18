@@ -8,6 +8,7 @@ import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.ListFoodResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
+import com.dicoding.suargaapp.data.remote.response.ScanPredictResponse
 import com.dicoding.suargaapp.data.remote.response.UploadResponse
 import com.dicoding.suargaapp.data.remote.retrofit.ApiService
 import com.dicoding.suargaapp.data.remote.retrofit.ScanApiService
@@ -89,6 +90,12 @@ class UserRepository private constructor(
         porsi: RequestBody
     ): UploadResponse {
         return scanApiService.upload(file, namaAktivitas, waktuMakan, idMakanan, porsi)
+    }
+
+    suspend fun predict(
+        file: MultipartBody.Part
+    ): ScanPredictResponse {
+        return scanApiService.predict(file)
     }
 
     companion object {

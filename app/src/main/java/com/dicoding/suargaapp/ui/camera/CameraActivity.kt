@@ -23,11 +23,19 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.dicoding.suargaapp.data.remote.response.Food
 import com.dicoding.suargaapp.databinding.ActivityCameraBinding
 import com.dicoding.suargaapp.ui.resultscan.ErrorScanActivity
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.utils.createCustomTempFile
+import com.dicoding.suargaapp.utils.reduceFileImage
+import com.dicoding.suargaapp.utils.uriToFile
+import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
@@ -35,6 +43,10 @@ class CameraActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
     private var isFlashEnabled = false
+
+    private val cameraViewModel by viewModels<CameraViewModel> {
+        AuthViewModelFactory.getInstance(this)
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -85,15 +97,24 @@ class CameraActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            uploadImage()
+            predictImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
     }
 
-    private fun openResultActivity(imageUri: Uri) {
+    private fun openResultActivity(imageUri: Uri, food: Food?) {
         val intent = Intent(this, ResultScanActivity::class.java).apply {
             putExtra(EXTRA_CAMERAX_IMAGE, imageUri.toString())
+            putExtra("portion", 1)
+            food?.let{
+                putExtra("id", it.id)
+                putExtra("nameFood", it.namaMakanan)
+                putExtra("carbohydrate", it.karbohidrat)
+                putExtra("protein", it.protein)
+                putExtra("fat", it.lemak)
+                putExtra("vitamin", it.vitamin)
+            }
         }
         startActivity(intent)
     }
@@ -152,7 +173,7 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     currentImageUri = output.savedUri ?: photoFile.toUri()
-                    uploadImage()
+                    predictImage()
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -167,10 +188,47 @@ class CameraActivity : AppCompatActivity() {
         )
     }
 
-    private fun uploadImage() {
+    private fun predictImage() {
         currentImageUri?.let { uri ->
-            openResultActivity(uri)
-            showLoading(false)
+            val imageFile = uriToFile(uri, this@CameraActivity).reduceFileImage()
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "image",
+                imageFile.name,
+                requestImageFile
+            )
+
+            showLoading(true)
+
+            lifecycleScope.launch {
+                try {
+                    val response = cameraViewModel.predict(imageMultipart)
+                    response.message?.let { message ->
+                        Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    val food = response.data?.nutrition?.let {
+                        Food(
+                            namaMakanan = it.namaMakanan,
+                            karbohidrat = it.karbohidrat ?: 0.0,
+                            protein = it.protein ?: 0.0,
+                            lemak = it.lemak ?: 0.0,
+                            vitamin = it.vitamin,
+                            createdAt = null,
+                            id = it.id ?: 0
+                        )
+                    }
+                    openResultActivity(uri, food)
+                } catch (e: Exception) {
+                    val intent = Intent(this@CameraActivity, ErrorScanActivity::class.java).apply{
+                        putExtra(EXTRA_CAMERAX_IMAGE, uri.toString())
+                    }
+                    startActivity(intent)
+                } finally {
+                    showLoading(false)
+                }
+            }
         }
     }
 

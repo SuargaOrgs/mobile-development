@@ -7,6 +7,7 @@ import com.dicoding.suargaapp.data.repository.UserRepository
 import com.dicoding.suargaapp.di.Injection
 import com.dicoding.suargaapp.ui.addfood.AddFoodViewModel
 import com.dicoding.suargaapp.ui.asesmen.AssessmentViewModel
+import com.dicoding.suargaapp.ui.camera.CameraViewModel
 import com.dicoding.suargaapp.ui.home.HomeViewModel
 import com.dicoding.suargaapp.ui.login.LoginViewModel
 import com.dicoding.suargaapp.ui.main.MainViewModel
@@ -42,6 +43,9 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(AddFoodViewModel::class.java) -> {
                 AddFoodViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
+                CameraViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

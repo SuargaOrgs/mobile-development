@@ -3,6 +3,7 @@ package com.dicoding.suargaapp.ui.addfood
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.suargaapp.data.remote.response.Food
@@ -10,6 +11,7 @@ import com.dicoding.suargaapp.databinding.ActivityAddFoodBinding
 import com.dicoding.suargaapp.ui.camera.CameraActivity.Companion.EXTRA_CAMERAX_IMAGE
 import com.dicoding.suargaapp.ui.resultscan.ResultScanActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import java.math.RoundingMode
 
 class AddFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddFoodBinding
@@ -36,6 +38,15 @@ class AddFoodActivity : AppCompatActivity() {
 
         setupAction()
 
+        val id = intent.getIntExtra("id", 0)
+        val nameFood = intent.getStringExtra("nameFood")
+        val portion = intent.getIntExtra("portion", 0)
+
+        if (id != 0 && nameFood != null) {
+            foodNamelEditText.setText(nameFood)
+            portionEditText.setText(portion.toString())
+        }
+
     }
 
     private fun setupAction() {
@@ -45,8 +56,8 @@ class AddFoodActivity : AppCompatActivity() {
         }
 
         binding.buttonSave.setOnClickListener{
-            val foodName = binding.foodNameEditText.text.toString()
-            val portion = binding.portionEditText.text.toString()
+            val foodName = binding.foodNameEditText.text.toString().trim()
+            val portion = binding.portionEditText.text.toString().trim()
             if (foodName.isNotEmpty() && portion.isNotEmpty()) {
                 checkFood(foodName)
             } else {
@@ -55,7 +66,10 @@ class AddFoodActivity : AppCompatActivity() {
         }
 
         binding.buttonCancel.setOnClickListener{
-            val intent = Intent(this, ResultScanActivity::class.java)
+            val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
+            val intent = Intent(this, ResultScanActivity::class.java).apply {
+                putExtra(EXTRA_CAMERAX_IMAGE, imageUriString)
+            }
             startActivity(intent)
         }
     }
@@ -73,11 +87,15 @@ class AddFoodActivity : AppCompatActivity() {
         val id = food.id
         val nameFood = food.namaMakanan
         val portion = binding.portionEditText.text.toString().toInt()
-        val carbohydrate = (food.karbohidrat?.times(portion))
-        val protein = food.protein?.times(portion)
-        val fat = food.lemak?.times(portion)
+        val carbohydrate = food.karbohidrat?.times(portion)?.toBigDecimal()?.setScale(1, RoundingMode.HALF_UP)?.toDouble()
+        val protein = food.protein?.times(portion)?.toBigDecimal()?.setScale(1, RoundingMode.HALF_UP)?.toDouble()
+        val fat = food.lemak?.times(portion)?.toBigDecimal()?.setScale(1, RoundingMode.HALF_UP)?.toDouble()
         val vitamin = food.vitamin
         val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
+
+        Log.d("carbohydrate", (carbohydrate.toString()))
+        Log.d("protein", (protein.toString()))
+        Log.d("fat", (fat.toString()))
 
         val intent = Intent(this, ResultScanActivity::class.java).apply {
             putExtra("id", id)

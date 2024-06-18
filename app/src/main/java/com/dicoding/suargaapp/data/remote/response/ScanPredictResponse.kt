@@ -2,10 +2,10 @@ package com.dicoding.suargaapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ListFoodResponse(
+data class ScanPredictResponse(
 
 	@field:SerializedName("data")
-	val data: List<Food>? = null,
+	val data: DataScan? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -17,10 +17,7 @@ data class ListFoodResponse(
 	val status: Int? = null
 )
 
-data class Food(
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
+data class Nutrition(
 
 	@field:SerializedName("karbohidrat")
 	val karbohidrat: Double? = null,
@@ -39,4 +36,13 @@ data class Food(
 
 	@field:SerializedName("lemak")
 	val lemak: Double? = null
+)
+
+data class DataScan(
+
+	@field:SerializedName("nutrition")
+	val nutrition: Nutrition? = null,
+
+	@field:SerializedName("indexValue")
+	val indexValue: Double? = null
 )

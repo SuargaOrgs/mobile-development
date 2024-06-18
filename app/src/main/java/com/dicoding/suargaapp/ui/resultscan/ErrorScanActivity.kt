@@ -9,6 +9,7 @@ import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.databinding.ActivityErrorScanBinding
 import com.dicoding.suargaapp.databinding.ActivityResultScanBinding
 import com.dicoding.suargaapp.ui.camera.CameraActivity
+import com.dicoding.suargaapp.ui.camera.CameraActivity.Companion.EXTRA_CAMERAX_IMAGE
 import com.dicoding.suargaapp.utils.createCustomTempFile
 
 class ErrorScanActivity : AppCompatActivity() {
@@ -27,7 +28,10 @@ class ErrorScanActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.btnLogManual.setOnClickListener{
-            val intent = Intent(this, ResultScanActivity::class.java)
+            val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
+            val intent = Intent(this, ResultScanActivity::class.java).apply {
+                putExtra(EXTRA_CAMERAX_IMAGE, imageUriString)
+            }
             startActivity(intent)
         }
         binding.btnBackScan.setOnClickListener{
