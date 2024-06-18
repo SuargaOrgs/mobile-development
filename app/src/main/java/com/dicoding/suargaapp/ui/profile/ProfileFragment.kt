@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAction()
+        observeViewModel()
     }
 
     private fun setupAction() {
@@ -40,6 +41,16 @@ class ProfileFragment : Fragment() {
         binding.premiumButton.setOnClickListener {
             val intent = Intent(requireContext(), PremiumActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+            val greetings = "Hallo Ibu, ${user.name}!"
+
+            binding.apply {
+                tvGreeting.text = greetings
+            }
         }
     }
 }

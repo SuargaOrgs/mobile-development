@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.round
 
 class HomeFragment : Fragment() {
     private val homeViewModel by viewModels<HomeViewModel> {
@@ -129,11 +130,9 @@ class HomeFragment : Fragment() {
                         }
 
                         binding.apply {
-                            tvKarbohidratMin.text =
-                                getString(R.string.karbohidrat_min, (nutrition.karbohidrat.toInt()))
-                            tvProteinMin.text =
-                                getString(R.string.protein_min, (nutrition.protein.toInt()))
-                            tvLemakMin.text = getString(R.string.lemak_min, (nutrition.lemak.toInt()))
+                            tvKarbohidratMin.text = getString(R.string.karbohidrat_min, round(nutrition.karbohidrat).toInt())
+                            tvProteinMin.text = getString(R.string.protein_min, round(nutrition.protein).toInt())
+                            tvLemakMin.text = getString(R.string.lemak_min, round(nutrition.lemak).toInt())
                         }
 
                         karbohidratMax?.let {
