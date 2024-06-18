@@ -4,6 +4,7 @@ This repository contains Android app that is implemented using an XML layout, en
 ## Table of Contents
 - Introduction
 - Tech Used
+- System Requirement
 - Steps to Replicate
 - Dependencies
 - Download APK Link
@@ -16,6 +17,9 @@ SUARGA is an app for pregnant mothers, offering food scanning, nutrition recomme
 Suarga android app developed with:
 1. Kotlin
 2. Android Studio
+
+## System Requirement
+This application can be used on Android devices with operating system version Android 5.0 and above.
 
 ## Steps to Replicate
 To replicate the Suarga Android Studio setup and run the application, follow these steps:
