@@ -12,6 +12,7 @@ import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.data.local.history.FoodHistoryItem
 import com.dicoding.suargaapp.databinding.FragmentRiwayatBinding
 import com.dicoding.suargaapp.ui.main.MainViewModel
+import com.dicoding.suargaapp.ui.profile.ProfileFragment
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
 class RiwayatFragment : Fragment() {
@@ -34,6 +35,7 @@ class RiwayatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupAction()
         observeViewModel()
 
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -52,12 +54,26 @@ class RiwayatFragment : Fragment() {
         )
     }
 
+    private fun setupAction(){
+        binding.avatar.setOnClickListener {
+            val profileFragment = ProfileFragment()
+
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, profileFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
     private fun observeViewModel() {
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
+            val firstLetter = user.name.firstOrNull()?.toString() ?: ""
 
             binding.apply {
                 tvGreeting.text = greetings
+                avatar.text = firstLetter
             }
         }
     }

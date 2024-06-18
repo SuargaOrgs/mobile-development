@@ -17,8 +17,11 @@ import com.dicoding.suargaapp.databinding.FragmentHomeBinding
 import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
 import com.dicoding.suargaapp.helper.Helper.convertUTCToWIB
 import com.dicoding.suargaapp.helper.Helper.getCurrentDate
+import com.dicoding.suargaapp.ui.article.ArticleFragment
 import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
 import com.dicoding.suargaapp.ui.login.LoginActivity
+import com.dicoding.suargaapp.ui.premium.PremiumActivity
+import com.dicoding.suargaapp.ui.profile.ProfileFragment
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -154,17 +157,37 @@ class HomeFragment : Fragment() {
                 showLoading(false)
             }
         }
+        binding.button.setOnClickListener {
+            val articleFragment = ArticleFragment()
+
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, articleFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+        binding.avatar.setOnClickListener {
+            val profileFragment = ProfileFragment()
+
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, profileFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
 
     private fun observeViewModel() {
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
+            val firstLetter = user.name.firstOrNull()?.toString() ?: ""
             val pregnancyAge= calculatePregnancyAge(user.pregnancyDate)
             val expectedBirth = 40 - pregnancyAge
 
             binding.apply {
                 tvGreeting.text = greetings
+                avatar.text=firstLetter
                 tvPregnancyAge.text = pregnancyAge.toString()
                 tvExpectedBirth.text = expectedBirth.toString()
             }

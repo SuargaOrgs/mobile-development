@@ -48,10 +48,13 @@ class ProfileFragment : Fragment() {
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
 
+            val firstLetter = user.name.firstOrNull()?.toString() ?: ""
+
             binding.apply {
                 tvGreeting.text = greetings
                 userName.text = user.name
                 userEmail.text = user.email
+                profileIcon.text = firstLetter
             }
         }
     }

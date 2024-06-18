@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.dicoding.suargaapp.R
 import com.dicoding.suargaapp.adapter.ArticleAdapter
 import com.dicoding.suargaapp.adapter.ViewPagerAdapter
 import com.dicoding.suargaapp.data.local.Article
 import com.dicoding.suargaapp.databinding.FragmentArticleBinding
 import com.dicoding.suargaapp.ui.main.MainViewModel
+import com.dicoding.suargaapp.ui.profile.ProfileFragment
 import com.dicoding.suargaapp.viewmodelfactory.ArticleViewModelFactory
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
 
@@ -40,6 +42,7 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupAction()
         observeViewModel()
 
         viewPager = binding.viewPager
@@ -111,12 +114,26 @@ class ArticleFragment : Fragment() {
         }
     }
 
+    private fun setupAction(){
+        binding.avatar.setOnClickListener {
+            val profileFragment = ProfileFragment()
+
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, profileFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
     private fun observeViewModel() {
         mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
+            val firstLetter = user.name.firstOrNull()?.toString() ?: ""
 
             binding.apply {
                 tvGreeting.text = greetings
+                avatar.text = firstLetter
             }
         }
     }
