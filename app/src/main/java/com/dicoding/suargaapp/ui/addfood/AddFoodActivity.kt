@@ -93,10 +93,6 @@ class AddFoodActivity : AppCompatActivity() {
         val vitamin = food.vitamin
         val imageUriString = intent.getStringExtra(EXTRA_CAMERAX_IMAGE)
 
-        Log.d("carbohydrate", (carbohydrate.toString()))
-        Log.d("protein", (protein.toString()))
-        Log.d("fat", (fat.toString()))
-
         val intent = Intent(this, ResultScanActivity::class.java).apply {
             putExtra("id", id)
             putExtra("nameFood", nameFood)

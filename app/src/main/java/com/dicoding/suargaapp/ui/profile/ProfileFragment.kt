@@ -11,6 +11,7 @@ import com.dicoding.suargaapp.databinding.FragmentProfileBinding
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.premium.PremiumActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -54,7 +55,7 @@ class ProfileFragment : Fragment() {
                 tvGreeting.text = greetings
                 userName.text = user.name
                 userEmail.text = user.email
-                profileIcon.text = firstLetter
+                profileIcon.text = firstLetter.uppercase()
             }
         }
     }

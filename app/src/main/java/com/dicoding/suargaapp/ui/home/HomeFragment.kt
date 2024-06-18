@@ -187,7 +187,7 @@ class HomeFragment : Fragment() {
 
             binding.apply {
                 tvGreeting.text = greetings
-                avatar.text=firstLetter
+                avatar.text = firstLetter.uppercase()
                 tvPregnancyAge.text = pregnancyAge.toString()
                 tvExpectedBirth.text = expectedBirth.toString()
             }
