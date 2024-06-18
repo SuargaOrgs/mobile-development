@@ -18,7 +18,7 @@ Suarga android app developed with:
 1. Kotlin
 2. Android Studio
 
-##System Requirement
+## System Requirement
 This application can be used on Android devices with operating system version Android 5.0 and above.
 
 ## Steps to Replicate
