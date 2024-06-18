@@ -308,7 +308,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/primary20"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="1dp"
                 android:padding="8dp"
                 android:paddingStart="24dp"
@@ -319,9 +319,8 @@
 
                 <TextView
                     android:id="@+id/tv_total_vitamin_label"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/tv_vitamin_total"
                     android:textColor="@color/primary70"
                     android:textSize="16sp"
@@ -331,7 +330,6 @@
                     android:id="@+id/tv_total_vitamin_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
                     android:text="-"
                     android:textColor="@color/primary70"
                     android:textSize="16sp"
