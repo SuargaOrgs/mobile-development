@@ -14,6 +14,7 @@ import com.dicoding.suargaapp.helper.Helper.calculatePregnancyAge
 import com.dicoding.suargaapp.ui.main.MainActivity
 import com.dicoding.suargaapp.ui.result.ResultActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import kotlin.math.round
 
 class AsesmenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAsesmenBinding
@@ -50,9 +51,9 @@ class AsesmenActivity : AppCompatActivity() {
 
             val bmr = calculateBMR(height, weight, age)
             val tee = calculateTEE(bmr)
-            val proteinNeeds = calculateProtein(tee).toInt()
-            val fatNeeds = calculateFat(tee).toInt()
-            val carbohydrateNeeds = calculateCarbohydrate(tee).toInt()
+            val proteinNeeds = round(calculateProtein(tee)).toInt()
+            val fatNeeds = round(calculateFat(tee)).toInt()
+            val carbohydrateNeeds = round(calculateCarbohydrate(tee)).toInt()
 
             assessmentViewModel.saveAssessment(height, weight, activity, stress, carbohydrateNeeds, proteinNeeds, fatNeeds).observe(this) { result ->
                 if (result.error == false) {

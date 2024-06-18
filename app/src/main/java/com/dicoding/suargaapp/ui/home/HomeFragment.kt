@@ -121,7 +121,7 @@ class HomeFragment : Fragment() {
                             val createdAt = it.createdAt
                             Log.d("cek created at", "setupAction: $createdAt ")
                             val createdAtWIB = createdAt?.let { it1 -> convertUTCToWIB(it1) }
-                            Log.d("cek created at", "setupAction: $createdAtWIB ")
+                            Log.d("cek created at WIB", "setupAction: $createdAtWIB ")
                             createdAtWIB == currentDate
                         }.fold(TotalNutrients()) { acc, item ->
                             acc.apply {
