@@ -50,6 +50,8 @@ class ProfileFragment : Fragment() {
 
             binding.apply {
                 tvGreeting.text = greetings
+                userName.text = user.name
+                userEmail.text = user.email
             }
         }
     }
