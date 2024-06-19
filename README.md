@@ -62,21 +62,8 @@ To replicate the Suarga Android Studio setup and run the application, follow the
 | `com.github.bumptech.glide:glide`                       | 4.16.0   | Image loading and caching library.                                          |
 
 ## Download APK Link
+https://bit.ly/SuargaApps 
 
 ## Contributors
 1. Faishal Fariz Hidayatullah - https://www.linkedin.com/in/faishalfariz/
 2. Apriandhita Aries Prayoga - https://www.linkedin.com/in/apriandhitaap/
-
-<b> Note </b>
-- Kode masih berantakan (yoga)
-- Alert dialog masih kasaran masih template (yoga)
-- ID belum diperbaiki (masih kasaran) (yoga & faishal)
-- toggle password yang hilang saat input masih salah (faishal)
-- Masih ada log dalam result activity (yoga) 
-- Masih ada bug di bagian dropdown ada yang masih belum bisa dipencet (Faishal)
-- checklist ingat saya di login masih belum ada fungsinya
-- Back button pada result scan activity belum bisa (faishal)
-- Coba cek fungsi untuk mencari token (yoga)
-- API Upload masih testing (yoga)
-- Halaman article masih belum mepunyai database dan masih kasaran (Faishal)
-- Artikel sudah database tinggal dirapikan lagi (yoga)
