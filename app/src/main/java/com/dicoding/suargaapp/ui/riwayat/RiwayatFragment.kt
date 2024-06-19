@@ -5,22 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.suargaapp.R
-import com.dicoding.suargaapp.data.local.history.FoodHistoryItem
+import com.dicoding.suargaapp.data.remote.response.ErrorResponse
+import com.dicoding.suargaapp.data.remote.response.HistoryItem
 import com.dicoding.suargaapp.databinding.FragmentRiwayatBinding
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.profile.ProfileFragment
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class RiwayatFragment : Fragment() {
 
     private lateinit var binding: FragmentRiwayatBinding
-    private lateinit var foodHistoryAdapter: FoodHistoryAdapter
-    private lateinit var recyclerView: RecyclerView
-    private val viewModel by viewModels<MainViewModel> {
+
+    private val riwayatViewModel by viewModels<RiwayatViewModel> {
+        AuthViewModelFactory.getInstance(requireContext())
+    }
+
+    private val mainViewModel by viewModels<MainViewModel> {
         AuthViewModelFactory.getInstance(requireContext())
     }
 
@@ -36,22 +45,8 @@ class RiwayatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
+        loadFoodHistory()
         observeViewModel()
-
-        recyclerView = view.findViewById(R.id.recyclerView)
-
-        foodHistoryAdapter = FoodHistoryAdapter(getFoodHistory())
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = foodHistoryAdapter
-    }
-
-    private fun getFoodHistory(): List<FoodHistoryItem> {
-        return listOf(
-            FoodHistoryItem("Nasi Goreng", "Pagi | 31 May 2024"),
-            FoodHistoryItem("Nasi Kandar", "Siang | 31 May 2024"),
-            FoodHistoryItem("Nasi Ayam", "Malam | 31 May 2024"),
-            FoodHistoryItem("Pisang", "Pagi | 1 Juni 2024"),
-        )
     }
 
     private fun setupAction(){
@@ -66,14 +61,42 @@ class RiwayatFragment : Fragment() {
         }
     }
 
+    private fun loadFoodHistory() {
+        showLoading(true)
+        lifecycleScope.launch {
+            try {
+                val foodHistory = riwayatViewModel.historyFood()
+                showRecyclerView(foodHistory.data)
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                val errorMessage = errorBody.message
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            } finally {
+                showLoading(false)
+            }
+        }
+    }
+
+    private fun showRecyclerView(item : List<HistoryItem>) {
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = FoodHistoryAdapter()
+        binding.recyclerView.adapter = adapter
+        adapter.submitList(item)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
     private fun observeViewModel() {
-        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+        mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
             val greetings = "Hallo Ibu, ${user.name}!"
             val firstLetter = user.name.firstOrNull()?.toString() ?: ""
 
             binding.apply {
                 tvGreeting.text = greetings
-                avatar.text = firstLetter
+                avatar.text = firstLetter.uppercase()
             }
         }
     }

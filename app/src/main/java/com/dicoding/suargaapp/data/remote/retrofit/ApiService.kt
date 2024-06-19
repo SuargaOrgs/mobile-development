@@ -3,6 +3,7 @@ package com.dicoding.suargaapp.data.remote.retrofit
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.DetailNutritionResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
+import com.dicoding.suargaapp.data.remote.response.HistoryResponse
 import com.dicoding.suargaapp.data.remote.response.ListFoodResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
@@ -44,6 +45,9 @@ interface ApiService {
 
     @GET("assessment")
     suspend fun getAssessmentResult(): GetAssessmentResponse
+
+    @POST("nutrition")
+    suspend fun historyFood() : HistoryResponse
 
     @GET("nutrition/foodStorage")
     suspend fun listFood() : ListFoodResponse

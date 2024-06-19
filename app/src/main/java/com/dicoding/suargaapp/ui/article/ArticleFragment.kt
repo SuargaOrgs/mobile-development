@@ -134,7 +134,7 @@ class ArticleFragment : Fragment() {
 
             binding.apply {
                 tvGreeting.text = greetings
-                avatar.text = firstLetter
+                avatar.text = firstLetter.uppercase()
             }
         }
     }

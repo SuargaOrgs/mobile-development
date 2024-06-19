@@ -12,6 +12,7 @@ import com.dicoding.suargaapp.ui.home.HomeViewModel
 import com.dicoding.suargaapp.ui.login.LoginViewModel
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.resultscan.ResultScanViewModel
+import com.dicoding.suargaapp.ui.riwayat.RiwayatViewModel
 import com.dicoding.suargaapp.ui.signup.SignUpViewModel
 
 class AuthViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -42,6 +43,9 @@ class AuthViewModelFactory(private val repository: UserRepository) : ViewModelPr
             }
             modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
                 CameraViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(RiwayatViewModel::class.java) -> {
+                RiwayatViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

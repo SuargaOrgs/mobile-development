@@ -5,6 +5,7 @@ import com.dicoding.suargaapp.data.pref.UserPreference
 import com.dicoding.suargaapp.data.remote.response.AssessmentResponse
 import com.dicoding.suargaapp.data.remote.response.DetailNutritionResponse
 import com.dicoding.suargaapp.data.remote.response.GetAssessmentResponse
+import com.dicoding.suargaapp.data.remote.response.HistoryResponse
 import com.dicoding.suargaapp.data.remote.response.ListFoodResponse
 import com.dicoding.suargaapp.data.remote.response.LoginResponse
 import com.dicoding.suargaapp.data.remote.response.RegisterResponse
@@ -76,6 +77,10 @@ class UserRepository private constructor(
 
     suspend fun listFood() : ListFoodResponse {
         return apiService.listFood()
+    }
+
+    suspend fun historyFood() : HistoryResponse {
+        return apiService.historyFood()
     }
 
     suspend fun listNutrition() : DetailNutritionResponse {
