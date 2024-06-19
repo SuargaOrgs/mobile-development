@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.dicoding.suargaapp.databinding.FragmentProfileBinding
 import com.dicoding.suargaapp.ui.asesmen.AsesmenActivity
+import com.dicoding.suargaapp.ui.detailprofile.DetailProfileActivity
+import com.dicoding.suargaapp.ui.editpassword.EditPasswordActivity
 import com.dicoding.suargaapp.ui.main.MainViewModel
 import com.dicoding.suargaapp.ui.premium.PremiumActivity
 import com.dicoding.suargaapp.viewmodelfactory.AuthViewModelFactory
@@ -46,10 +48,12 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
         binding.profileButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), DetailProfileActivity::class.java)
+            startActivity(intent)
         }
         binding.changePassButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Fitur masih dalam proses pengembangan", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), EditPasswordActivity::class.java)
+            startActivity(intent)
         }
         binding.assesmentButton.setOnClickListener {
             val intent = Intent(requireContext(), AsesmenActivity::class.java)

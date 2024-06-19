@@ -133,6 +133,12 @@
     <string name="tv_protein_total">Protein</string>
     <string name="tv_vitamin_total">Vitamin</string>
     <string name="paketPremium">Paket Premium</string>
+    <string name="tv_myProfile">Profil Saya</string>
+    <string name="edit">Edit Profile</string>
+    <string name="tv_ubahProfil">Ubah Profil</string>
+    <string name="tv_changePass">Ubah Kata Sandi</string>
+    <string name="oldPass">Password Lama</string>
+    <string name="newPass">Password Baru</string>
 
 
 </resources>
