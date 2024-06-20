@@ -62,7 +62,7 @@ To replicate the Suarga Android Studio setup and run the application, follow the
 | `com.github.bumptech.glide:glide`                       | 4.16.0   | Image loading and caching library.                                          |
 
 ## Download APK Link
-https://bit.ly/SuargaApps 
+http://bit.ly/SuargaApp
 
 ## Contributors
 1. Faishal Fariz Hidayatullah - https://www.linkedin.com/in/faishalfariz/
